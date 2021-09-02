@@ -20,7 +20,6 @@ const CartWidget = () => {
               stroke-linejoin="round"
             />
           </svg>
-
           <span className="absolute top-0 left-0 p-1 text-xs text-white bg-green-500 rounded-full"></span>
         </a>
       </div>

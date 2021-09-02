@@ -70,53 +70,53 @@ const NavBar = () => {
 
             <CartWidget />
 
-            <div class="relative items-center mt-4 md:mt-0 mx-6">
+            <div className="dropdown relative items-center mt-4 md:mt-0 mx-6">
               <button
                 type="button"
-                class="relative z-10 block p-2 bg-white rounded-md dark:bg-gray-800 focus:outline-none"
+                className="relative z-10 block p-2 bg-white rounded-md dark:bg-gray-800 focus:outline-none"
                 aria-label="toggle profile dropdown"
               >
-                <div class="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
+                <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
                   <img
                     src="https://avatars.githubusercontent.com/u/63756946?s=48&v=4"
-                    class="object-cover w-full h-full"
+                    className="object-cover w-full h-full"
                     alt="avatar"
                   />
                 </div>
 
-                <h3 class="mx-2 text-sm font-medium text-gray-700 dark:text-gray-200 md:hidden">
+                <h3 className="mx-2 text-sm font-medium text-gray-700 dark:text-gray-200 md:hidden">
                   Fede Ulbrich
                 </h3>
               </button>
               {/* <!-- Dropdown menu --> */}
-              <div class="absolute invisible right-0 z-20 w-48 py-2 mt-2 bg-white rounded-md shadow-xl dark:bg-gray-800">
+              <div className="absolute opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95  right-0 z-20 w-48 py-2 mt-2 bg-white rounded-md shadow-xl dark:bg-gray-800">
                 <a
                   href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white"
+                  className="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white"
                 >
-                  your profile
+                  Your profile
                 </a>
                 <a
                   href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white"
+                  className="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white"
                 >
-                  Your projects
+                  Your orders
                 </a>
                 <a
                   href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white"
+                  className="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white"
                 >
                   Help
                 </a>
                 <a
                   href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white"
+                  className="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white"
                 >
                   Settings
                 </a>
                 <a
                   href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white"
+                  className="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white"
                 >
                   Sign Out
                 </a>

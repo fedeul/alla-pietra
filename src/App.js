@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <NavBar />
-      <ItemListContainer />
+      <ItemListContainer greeting="¡Hola Usuario!" />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h1>I'm Fede</h1>
