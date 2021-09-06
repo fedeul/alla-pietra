@@ -2,8 +2,12 @@ import React from "react";
 import Logotipo from "../../assets/img/logo-01.png";
 import logotipo from "../../index.css";
 import CartWidget from "./CartWidget";
+import { useState } from "react";
 
 const NavBar = () => {
+  const [estado, setEstado] = useState(
+    <span className="bg-green-400">CONNECTED</span>
+  );
   return (
     <>
       <nav className="bg-white shadow dark:bg-gray-800">
@@ -12,7 +16,7 @@ const NavBar = () => {
             <div>
               <a
                 className="text-2xl font-bold text-gray-800 dark:text-white lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300"
-                href="#"
+                href="#home"
               >
                 <img
                   src={Logotipo}
@@ -44,25 +48,25 @@ const NavBar = () => {
             <div className="flex flex-col md:flex-row md:mx-6">
               <a
                 className="my-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-green-500 dark:hover:text-green-400 md:mx-4 md:my-0"
-                href="#"
+                href="#home"
               >
                 Home
               </a>
               <a
                 className="my-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-green-500 dark:hover:text-green-400 md:mx-4 md:my-0"
-                href="#"
+                href="#shop"
               >
                 Shop
               </a>
               <a
                 className="my-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-green-500 dark:hover:text-green-400 md:mx-4 md:my-0"
-                href="#"
+                href="#contact"
               >
                 Contact
               </a>
               <a
                 className="my-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-green-500 dark:hover:text-green-400 md:mx-4 md:my-0"
-                href="#"
+                href="#about"
               >
                 About
               </a>
@@ -87,41 +91,45 @@ const NavBar = () => {
                 <h3 className="mx-2 text-sm font-medium text-gray-700 dark:text-gray-200 md:hidden">
                   Fede Ulbrich
                 </h3>
-              </button>
+              </button>{" "}
               {/* <!-- Dropdown menu --> */}
               <div className="absolute opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95  right-0 z-20 w-48 py-2 mt-2 bg-white rounded-md shadow-xl dark:bg-gray-800">
                 <a
-                  href="#"
+                  href="#profile"
                   className="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white"
                 >
                   Your profile
                 </a>
                 <a
-                  href="#"
+                  href="#orders"
                   className="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white"
                 >
                   Your orders
                 </a>
                 <a
-                  href="#"
+                  href="#help"
                   className="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white"
                 >
                   Help
                 </a>
                 <a
-                  href="#"
+                  href="#settings"
                   className="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white"
                 >
                   Settings
                 </a>
                 <a
-                  href="#"
+                  href="#logout"
+                  onClick={() =>
+                    setEstado(<span className="bg-red-400">DISCONNECTED</span>)
+                  }
                   className="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white"
                 >
                   Sign Out
                 </a>
               </div>
             </div>
+            {estado}
           </div>
         </div>
       </nav>
