@@ -4,7 +4,7 @@ const CartWidget = () => {
       <div className="flex justify-center md:block">
         <a
           className="relative text-gray-700 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-300"
-          href="#"
+          href="1"
         >
           <svg
             className="w-5 h-5"
