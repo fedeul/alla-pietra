@@ -1,8 +1,9 @@
 import React from "react";
-import Logotipo from "../../assets/img/logo-01.png";
-import logotipo from "../../index.css";
+import Logotipo from "../../assets/img/logo.png";
+import "../../index.css";
 import CartWidget from "./CartWidget";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   const [estado, setEstado] = useState(
@@ -13,18 +14,17 @@ const NavBar = () => {
       <nav className="bg-white shadow dark:bg-gray-800">
         <div className="container px-6 py-4 mx-auto md:flex md:justify-between md:items-center">
           <div className="flex items-center justify-between">
-            <div>
-              <a
-                className="text-2xl font-bold text-gray-800 dark:text-white lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300"
-                href="#home"
-              >
-                <img
-                  src={Logotipo}
-                  className="logotipo"
-                  alt="Almacen Panadero"
-                />
-              </a>
-            </div>
+            <Link exact to="/">
+              <div>
+                <button className="text-2xl font-bold text-gray-800 dark:text-white lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300">
+                  <img
+                    src={Logotipo}
+                    className="logotipo"
+                    alt="Almacen Panadero"
+                  />
+                </button>
+              </div>
+            </Link>
 
             {/* <!-- Mobile menu button --> */}
             <div className="flex md:hidden">
@@ -46,30 +46,36 @@ const NavBar = () => {
           {/* <!-- Mobile Menu open: "block", Menu closed: "hidden" --> */}
           <div className="items-center md:flex">
             <div className="flex flex-col md:flex-row md:mx-6">
-              <a
-                className="my-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-green-500 dark:hover:text-green-400 md:mx-4 md:my-0"
-                href="#home"
-              >
-                Home
-              </a>
-              <a
-                className="my-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-green-500 dark:hover:text-green-400 md:mx-4 md:my-0"
-                href="#shop"
-              >
-                Shop
-              </a>
-              <a
-                className="my-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-green-500 dark:hover:text-green-400 md:mx-4 md:my-0"
-                href="#contact"
-              >
-                Contact
-              </a>
-              <a
-                className="my-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-green-500 dark:hover:text-green-400 md:mx-4 md:my-0"
-                href="#about"
-              >
-                About
-              </a>
+              <Link exact to="/categories">
+                <p className="my-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-yellow-600 dark:hover:text-green-400 md:mx-4 md:my-0">
+                  Caregories
+                </p>
+              </Link>
+              <Link exact to="/sales">
+                <p
+                  className="my-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-yellow-600 dark:hover:text-green-400 md:mx-4 md:my-0"
+                  href="#sales"
+                >
+                  Shop
+                </p>
+              </Link>
+              <Link exact to="/contact">
+                <p
+                  className="my-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-yellow-600 dark:hover:text-green-400 md:mx-4 md:my-0"
+                  href="#contact"
+                >
+                  Contact
+                </p>
+              </Link>
+              <Link exact to="/about">
+                {" "}
+                <p
+                  className="my-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-yellow-600 dark:hover:text-green-400 md:mx-4 md:my-0"
+                  href="#about"
+                >
+                  About
+                </p>
+              </Link>
             </div>
 
             <CartWidget />

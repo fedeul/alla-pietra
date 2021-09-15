@@ -1,15 +1,26 @@
-import logo from "./logo.svg";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
-import ItemListContainer from "./components/ItemListContainer";
-// import { IoLogOutOutline } from "react-icons/io5";
+import ItemListContainer from "./components/Containers/ItemListContainer";
+import ItemDetailContainer from "./components/Containers/ItemDetailContainer";
+import Cart from "./components/Cart/Cart";
 
 function App() {
   return (
-    <div className="App">
-      <NavBar />
-      <ItemListContainer greeting="¡Hola Usuario!" />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <NavBar />
+        <Switch>
+          <Route path="/" exact>
+            <ItemListContainer greeting="¡Hola Usuario!" />
+          </Route>
+          <Route path="/detail" component={ItemDetailContainer} />
+          <Route path="/detail/idDetail" component={ItemDetailContainer} />
+          <Route path="/category/idCategory" component={ItemDetailContainer} />
+          <Route path="/cart" component={Cart} />
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 
