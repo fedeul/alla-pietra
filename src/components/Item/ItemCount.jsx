@@ -69,7 +69,7 @@ const ItemCount = () => {
       </div>
       <h1 className="text-gray-700 text-center align-baseline">
         <span className="text-xl leading-none ">Total $</span>
-        <span className="font-bold text-2xl  "> {totalPrice}</span>
+        <span className="font-bold text-2xl "> {totalPrice}</span>
       </h1>
     </>
   );

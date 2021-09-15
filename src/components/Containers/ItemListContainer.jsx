@@ -1,4 +1,5 @@
-import Item from "../Item/Item";
+// import Item from "../Item/Item";
+import ItemList from "../Item/ItemList";
 // import { useParams } from "react-router-dom";
 
 const ItemListContainer = ({ greeting }) => {
@@ -6,8 +7,8 @@ const ItemListContainer = ({ greeting }) => {
   return (
     <>
       <h2>{greeting}</h2>
-      <div className="px-10 grid grid-cols-3 gap-4">
-        <Item />
+      <div className="mt-6 px-10 grid grid-cols-3 gap-4">
+        <ItemList />
       </div>
     </>
   );

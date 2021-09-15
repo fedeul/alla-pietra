@@ -24,3 +24,40 @@ code {
   transform: translate(0) scale(1);
   visibility: visible;
 }
+
+/* LOADING CIRCLE */
+.loading-wrap {
+  height: 100vh;
+  display: flex;
+  margin: -25px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loading {
+  height: 180px;
+  width: 180px;
+  background: #fff;
+  border-radius: 50%;
+  margin: auto;
+}
+.loading::after {
+  content: " ";
+  display: block;
+  height: 200px;
+  width: 200px;
+  top: -10px;
+  left: -10px;
+
+  background-image: linear-gradient(to left, #a5ac1b 50%, #fff 0);
+  position: relative;
+  z-index: -1;
+  border-radius: 50%;
+  transform: rotate(0turn);
+  animation: anim 1s infinite ease-in-out;
+}
+@keyframes anim {
+  100% {
+    transform: rotate(1turn);
+  }
+}
