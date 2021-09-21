@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import ItemCount from "../Item/ItemCount";
 
-const Item = (props) => {
-  const { item } = props;
+const Item = ({ item }) => {
+  // const { item } = props;
   return (
     <div
       key={item.id}
@@ -17,7 +17,7 @@ const Item = (props) => {
               alt={item.name}
             />
             <div className="py-6 px-8 rounded-lg bg-white">
-              <Link to="/detail/idDetail">
+              <Link to="/detail">
                 <h1 className="text-gray-700 font-bold text-2xl mb-3 h-16	flex place-items-center hover:text-gray-900 hover:cursor-pointer">
                   {item.name}
                 </h1>
@@ -26,7 +26,7 @@ const Item = (props) => {
               <p className="text-gray-700 tracking-wide line-clamp-3">
                 {item.cap}
               </p>
-              <Link to="/detail/idDetail">
+              <Link to={`/detail/${item.id}`}>
                 <p className="opacity-50 text-gray-900 hover:opacity-100 inline-block text-xs leading-none border-b border-gray-900">
                   MORE
                 </p>

@@ -14,10 +14,14 @@ function App() {
           <Route path="/" exact>
             <ItemListContainer greeting="¡Hola Usuario!" />
           </Route>
-          <Route path="/detail" component={ItemDetailContainer} />
-          <Route path="/detail/idDetail" component={ItemDetailContainer} />
-          <Route path="/category/idCategory" component={ItemDetailContainer} />
-          <Route path="/cart" component={Cart} />
+          <Route path="/category/:categoryId" component={ItemListContainer} />
+
+          {/* <Route path="/detail" exact>
+            <ItemDetailContainer />
+          </Route> */}
+          <Route path="/detail" exact component={ItemDetailContainer} />
+          <Route path="/detail/:itemId" component={ItemDetailContainer} />
+          <Route path="/cart" component={Cart} exact />
         </Switch>
       </div>
     </BrowserRouter>
