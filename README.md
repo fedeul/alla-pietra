@@ -2,6 +2,8 @@
 
 This is an E-commerce developed using React JS
 
+![Animation: Almacen Panadero](https://github.com/fedeul/almacen-panadero/raw/main/src/assets/img/AlmacenPanaderoAnimation.gif)
+
 ## Licenses
 
 Add badges from somewhere like: [shields.io](https://shields.io/)
