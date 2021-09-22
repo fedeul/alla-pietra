@@ -19,7 +19,7 @@ function App() {
             <Route path="/category/:categoryId" component={ItemListContainer} />
             <Route path="/detail" exact component={ItemDetailContainer} />
             <Route path="/detail/:itemId" component={ItemDetailContainer} />
-            <Route path="/cart" component={Cart} exact />
+            <Route path="/cart" exact component={Cart} />
           </Switch>
         </div>
       </BrowserRouter>
