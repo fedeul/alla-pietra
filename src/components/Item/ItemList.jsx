@@ -2,13 +2,13 @@ import { useState, useEffect } from "react";
 import Item from "../Item/Item";
 import { getItems } from "../../data/mockup";
 
-const ItemList = () => {
-  const [item, setItem] = useState([]);
+const ItemList = ({ item }) => {
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
     getItems
       .then((respuesta) => {
-        setItem(respuesta);
+        setItems(respuesta);
       })
       .catch((error) => console.log(error));
   }, []);

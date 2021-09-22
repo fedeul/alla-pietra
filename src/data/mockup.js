@@ -1,4 +1,4 @@
-const items = [
+const itemsCatalog = [
   {
     id: 1,
     name: "Bread Proofing Baskets Set",
@@ -41,7 +41,7 @@ export const getItems = new Promise((res, rej) => {
   let respuesta = "200";
   if (respuesta === "200") {
     setTimeout(() => {
-      res(items);
+      res(itemsCatalog);
     }, 2000);
   } else {
     rej("404");

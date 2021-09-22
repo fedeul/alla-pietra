@@ -1,7 +1,19 @@
 import ItemCount from "./ItemCount";
+import { useState, useEffect } from "react";
+// import Item from "../Item/Item";
+// import { getItems } from "../../data/mockup";
 
 const ItemDetail = (props) => {
   const { item } = props;
+
+  // const [items, setItems] = useState([]);
+  // useEffect(() => {
+  //   getItems
+  //     .then((respuesta) => {
+  //       setItems(respuesta);
+  //     })
+  //     .catch((error) => console.log(error));
+  // }, []);
   return (
     <div
       key={item.id}

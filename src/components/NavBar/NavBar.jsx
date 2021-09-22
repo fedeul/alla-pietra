@@ -48,11 +48,11 @@ const NavBar = () => {
           <div className="items-center md:flex">
             <div className="flex flex-col md:flex-row md:mx-6">
               <div className="dropdown relative items-center mt-4 md:mt-0 mx-6">
-                <Link exact to="">
+                <button>
                   <p className="flex place-items-center my-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-yellow-600 dark:hover:text-green-400 md:mx-4 md:my-0">
                     Categories <IoCaretDown />
                   </p>
-                </Link>
+                </button>
                 {/* <!-- Dropdown menu --> */}
                 <div className="absolute opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95  right-0 z-20 w-48 py-2 mt-2 bg-white rounded-md shadow-xl dark:bg-gray-800">
                   <Link exact to="/category/accesories">

@@ -6,7 +6,7 @@ const ButtonGoCart = () => {
     <Link to="/cart">
       <button
         onClick={() => console.log("cart")}
-        className="bg-green-500 shadow-md  flex place-items-center opacity-75 hover:opacity-100 text-yellow-900 hover:text-gray-900 rounded-full px-8 py-2 font-semibold"
+        className="bg-green-500 shadow-md  flex place-items-center opacity-75 hover:opacity-100 text-gray-700 hover:text-gray-900 rounded-full px-8 py-2 font-semibold"
       >
         GO TO
         <svg
@@ -28,10 +28,10 @@ const ButtonGoCart = () => {
   );
 };
 
-const ButtonAddToCart = ({ handleInter }) => {
+const ButtonAddToCart = ({ handleButtonChange }) => {
   return (
     <button
-      onClick={handleInter}
+      onClick={handleButtonChange}
       className="bg-yellow-400 shadow-md  flex place-items-center opacity-75 hover:opacity-100 text-yellow-900 hover:text-gray-900 rounded-full px-7 py-2 font-semibold"
     >
       ADD TO
@@ -55,10 +55,10 @@ const ButtonAddToCart = ({ handleInter }) => {
 
 const ItemCount = () => {
   // ===== PARA USAR EN FUTUROS CAMPOS DE INPUT ===== //
-  // const [ButtonType, setButtonType] = useState("button");
-  // const handleInter = () => {
-  //   setButtonType("button");
-  // };
+  const [ButtonType, setButtonType] = useState("CheckOut");
+  const handleButtonChange = () => {
+    setButtonType("add");
+  };
 
   let price = 20;
 
@@ -107,11 +107,12 @@ const ItemCount = () => {
           >
             -
           </button>{" "}
-          {stock.item > 0 ? (
+          {stock.item > 0 && ButtonType === "add" ? (
             <ButtonGoCart />
           ) : (
-            <ButtonAddToCart />
-            // <ButtonAddToCart handleInter={handleInter} />
+            // <ButtonAddToCart />
+            // ===== PARA USAR EN FUTUROS CAMPOS DE INPUT ===== //
+            <ButtonAddToCart handleButtonChange={handleButtonChange} />
           )}
         </div>
       </div>

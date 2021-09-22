@@ -29,10 +29,6 @@ const ItemListContainer = ({ greeting }) => {
       }, 2000);
     }
   }, [categoryId]);
-  console.log("====================================");
-  console.log(categoryId);
-  console.log(item.category);
-  console.log("====================================");
   return (
     <>
       <h2>{greeting}</h2>
