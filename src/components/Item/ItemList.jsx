@@ -1,6 +1,7 @@
+import { memo } from "react";
 import Item from "../Item/Item";
 
-const ItemList = ({ item }) => {
+const ItemList = memo(({ item }) => {
   return (
     <>
       {item.map((item) => (
@@ -8,6 +9,6 @@ const ItemList = ({ item }) => {
       ))}
     </>
   );
-};
+});
 
 export default ItemList;

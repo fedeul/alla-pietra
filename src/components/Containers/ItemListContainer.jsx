@@ -9,6 +9,15 @@ const ItemListContainer = ({ greeting }) => {
   const { categoryId } = useParams();
 
   useEffect(() => {
+    //   const dbList = getFirestore();
+    //   dbList
+    //     .collection("ítems")
+    //     .get()
+    //     .then((resp) => console.log(resp))
+    //     .catch((err) => console.log(err))
+    //     .finally(() => setLoading(false));
+    // });
+
     if (categoryId) {
       setTimeout(() => {
         getItems
@@ -17,7 +26,7 @@ const ItemListContainer = ({ greeting }) => {
           })
           .catch((error) => console.log(error))
           .finally(() => setLoading(false));
-      }, 2000);
+      }, 500);
     } else {
       setTimeout(() => {
         getItems
@@ -26,12 +35,15 @@ const ItemListContainer = ({ greeting }) => {
           })
           .catch((error) => console.log(error))
           .finally(() => setLoading(false));
-      }, 2000);
+      }, 1000);
     }
   }, [categoryId]);
   return (
     <>
       <h2>{greeting}</h2>
+      <h3 className="text-3xl font-bold text-yellow-600 uppercase">
+        {categoryId}
+      </h3>
 
       {loading ? (
         <div className="loading-wrap">

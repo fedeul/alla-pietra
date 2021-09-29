@@ -1,16 +1,28 @@
 import { Link } from "react-router-dom";
 import ItemCount from "../Item/ItemCount";
+// import { useCartContext } from "../../context/cartContext";
 
 const Item = (props) => {
   const { item } = props;
+
+  // const { addToCart } = useCartContext();
+
+  // const onAdd = (qty) => {
+  //   addToCart({ item: item, qty: qty });
+  // };
+  // console.log(addToCart);
+
   return (
     <div
       key={item.id}
       className="col-span-3 sm:col-span-2 md:col-span-2 lg:col-span-2 xl:col-span-1 flex flex-cols items-center"
     >
       <div className="container flex justify-center ">
-        <div className="max-w-sm py-24">
+        <div className="max-w-sm py-6">
           <div className="h-auto bg-white relative shadow-lg hover:shadow-xl transition duration-500 rounded-lg">
+            <div className="absolute top-2 right-2 py-2 px-4 bg-black text-white rounded-lg shadow-2xl">
+              <span className="text-md">$ {item.price}</span>
+            </div>
             <img
               className="object-contain max-h-64 w-full rounded-t-lg"
               src={item.img}
@@ -27,14 +39,17 @@ const Item = (props) => {
                 {item.cap}
               </p>
               <Link to={`/detail/${item.id}`}>
-                <p className="opacity-50 text-gray-900 hover:opacity-100 inline-block text-xs leading-none border-b border-gray-900">
+                <button className="bg-black hover:opacity-50 shadow-2xl mt-4 w-full py-4 text-gray-100 inline-block text-sm leading-none border-b border-gray-100">
                   MORE
-                </p>
+                </button>
               </Link>
-              <ItemCount />
-            </div>
-            <div className="absolute top-2 right-2 py-2 px-4 bg-black text-white rounded-lg shadow-2xl">
-              <span className="text-md">$ {item.price}</span>
+              {/* <ItemCount
+                initial={0}
+                // qty={qty}
+                price={item.price}
+                stock={item.stock}
+                onAdd={onAdd}
+              /> */}
             </div>
           </div>
         </div>

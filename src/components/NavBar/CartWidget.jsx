@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
+import { useCartContext } from "../../context/cartContext";
 
 const CartWidget = () => {
+  const { iconCart } = useCartContext();
+
   return (
     <>
-      <Link to="cart">
+      <Link to="/cart">
         <div className="flex justify-center md:block">
           <button className="relative text-gray-700 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-300">
             <svg
@@ -18,9 +21,12 @@ const CartWidget = () => {
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-              />
+                value="3"
+              ></path>
             </svg>
-            <span className="absolute top-0 left-0 p-1 text-xs text-white bg-green-500 rounded-full"></span>
+            <span className="absolute bottom-3 right-3 p-1 px-2 text-xs text-white bg-green-500 bg-opacity-75 hover:bg-opacity-75 hover:bg-yellow-500 rounded-full">
+              <span className="bg-opacity-100">{iconCart()}</span>
+            </span>
           </button>
         </div>
       </Link>

@@ -5,10 +5,114 @@ import CartWidget from "./CartWidget";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { IoCaretDown } from "react-icons/io5";
+import { useCartContext } from "../../context/cartContext";
 
 const NavBar = () => {
-  const [estado, setEstado] = useState(
-    <span className="bg-green-400">CONNECTED</span>
+  const { iconCart } = useCartContext;
+  const [estadoLogIn, setEstadoLogIn] = useState(
+    <div className="dropdown relative items-center mt-4 md:mt-0 mx-6">
+      <button
+        type="button"
+        className="relative z-10 block p-2 bg-white rounded-md dark:bg-gray-800 focus:outline-none"
+        aria-label="toggle profile dropdown"
+      >
+        <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
+          <img
+            src="https://avatars.githubusercontent.com/u/63756946?s=48&v=4"
+            className="object-cover w-full h-full"
+            alt="avatar"
+          />
+        </div>
+
+        <h3 className="mx-2 text-sm font-medium text-gray-700 dark:text-gray-200 md:hidden">
+          Fede Ulbrich
+        </h3>
+      </button>{" "}
+      {/* <!-- Dropdown menu --> */}
+      <div className="absolute opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95  right-0 z-20 w-48 py-2 mt-2 bg-white rounded-md shadow-xl dark:bg-gray-800">
+        <a
+          href="#profile"
+          className="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white"
+        >
+          Your profile
+        </a>
+        <a
+          href="#orders"
+          className="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white"
+        >
+          Your orders
+        </a>
+        <a
+          href="#help"
+          className="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white"
+        >
+          Help
+        </a>
+        <a
+          href="#settings"
+          className="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white"
+        >
+          Settings
+        </a>
+        <a
+          href="#logout"
+          onClick={() =>
+            setEstadoLogIn(
+              <div className="dropdown relative items-center mt-4 md:mt-0 mx-6">
+                <button
+                  type="button"
+                  className="relative z-10 block p-2 bg-white rounded-md dark:bg-gray-800 focus:outline-none"
+                  aria-label="toggle profile dropdown"
+                >
+                  <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+                      className="object-cover w-full h-full"
+                      alt="avatar"
+                    />
+                  </div>
+
+                  <h3 className="mx-2 text-sm font-medium text-gray-700 dark:text-gray-200 md:hidden">
+                    Sign in
+                  </h3>
+                </button>{" "}
+                {/* <!-- Dropdown menu --> */}
+                <div className="absolute opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95  right-0 z-20 w-48 py-2 mt-2 bg-white rounded-md shadow-xl dark:bg-gray-800">
+                  <a
+                    href="#logout"
+                    onClick={() =>
+                      setEstadoLogIn(
+                        <div className="dropdown relative items-center mt-4 md:mt-0 mx-6">
+                          <button
+                            type="button"
+                            className="relative z-10 block p-2 bg-white rounded-md dark:bg-gray-800 focus:outline-none"
+                            aria-label="toggle profile dropdown"
+                          >
+                            <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
+                              <img
+                                src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+                                className="object-cover w-full h-full"
+                                alt="avatar"
+                              />
+                            </div>
+                          </button>
+                        </div>
+                      )
+                    }
+                    className="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white"
+                  >
+                    Sign in
+                  </a>
+                </div>
+              </div>
+            )
+          }
+          className="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white"
+        >
+          Sign Out
+        </a>
+      </div>
+    </div>
   );
   return (
     <>
@@ -55,9 +159,9 @@ const NavBar = () => {
                 </button>
                 {/* <!-- Dropdown menu --> */}
                 <div className="absolute opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95  right-0 z-20 w-48 py-2 mt-2 bg-white rounded-md shadow-xl dark:bg-gray-800">
-                  <Link exact to="/category/accesories">
+                  <Link exact to="/category/equipment">
                     <p className="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white">
-                      Accesories
+                      Equipment
                     </p>
                   </Link>
                   <Link exact to="/category/tools">
@@ -68,90 +172,33 @@ const NavBar = () => {
                 </div>
               </div>
               <Link exact to="/sales">
-                <p
+                <button
                   className="my-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-yellow-600 dark:hover:text-green-400 md:mx-4 md:my-0"
                   href="#sales"
                 >
                   Sales
-                </p>
+                </button>
               </Link>
               <Link exact to="/contact">
-                <p
+                <button
                   className="my-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-yellow-600 dark:hover:text-green-400 md:mx-4 md:my-0"
                   href="#contact"
                 >
                   Contact
-                </p>
+                </button>
               </Link>
               <Link exact to="/about">
                 {" "}
-                <p
+                <button
                   className="my-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-yellow-600 dark:hover:text-green-400 md:mx-4 md:my-0"
                   href="#about"
                 >
                   About
-                </p>
+                </button>
               </Link>
             </div>
-
-            <CartWidget />
-
-            <div className="dropdown relative items-center mt-4 md:mt-0 mx-6">
-              <button
-                type="button"
-                className="relative z-10 block p-2 bg-white rounded-md dark:bg-gray-800 focus:outline-none"
-                aria-label="toggle profile dropdown"
-              >
-                <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
-                  <img
-                    src="https://avatars.githubusercontent.com/u/63756946?s=48&v=4"
-                    className="object-cover w-full h-full"
-                    alt="avatar"
-                  />
-                </div>
-
-                <h3 className="mx-2 text-sm font-medium text-gray-700 dark:text-gray-200 md:hidden">
-                  Fede Ulbrich
-                </h3>
-              </button>{" "}
-              {/* <!-- Dropdown menu --> */}
-              <div className="absolute opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95  right-0 z-20 w-48 py-2 mt-2 bg-white rounded-md shadow-xl dark:bg-gray-800">
-                <a
-                  href="#profile"
-                  className="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white"
-                >
-                  Your profile
-                </a>
-                <a
-                  href="#orders"
-                  className="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white"
-                >
-                  Your orders
-                </a>
-                <a
-                  href="#help"
-                  className="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white"
-                >
-                  Help
-                </a>
-                <a
-                  href="#settings"
-                  className="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white"
-                >
-                  Settings
-                </a>
-                <a
-                  href="#logout"
-                  onClick={() =>
-                    setEstado(<span className="bg-red-400">DISCONNECTED</span>)
-                  }
-                  className="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white"
-                >
-                  Sign Out
-                </a>
-              </div>
-            </div>
-            {estado}
+            <CartWidget iconCart={iconCart} />
+            {estadoLogIn}
           </div>
         </div>
       </nav>

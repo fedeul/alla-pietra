@@ -13,7 +13,9 @@ const ItemDetailContainer = () => {
     setTimeout(() => {
       getItems
         .then((respuesta) => {
-          setItem(respuesta.find((item) => item.id == itemId));
+          setItem(
+            respuesta.find((item) => parseInt(item.id) === parseInt(itemId))
+          );
           setLoading(false);
         })
         .catch((error) => console.log(error));

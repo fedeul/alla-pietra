@@ -1,19 +1,16 @@
+import { useCartContext } from "../../context/cartContext";
+
 import ItemCount from "./ItemCount";
-import { useState, useEffect } from "react";
-// import Item from "../Item/Item";
-// import { getItems } from "../../data/mockup";
 
 const ItemDetail = (props) => {
   const { item } = props;
 
-  // const [items, setItems] = useState([]);
-  // useEffect(() => {
-  //   getItems
-  //     .then((respuesta) => {
-  //       setItems(respuesta);
-  //     })
-  //     .catch((error) => console.log(error));
-  // }, []);
+  const { addToCart } = useCartContext();
+
+  const onAdd = (qty) => {
+    addToCart({ item: item, totalQty: qty });
+  };
+
   return (
     <div
       key={item.id}
@@ -34,15 +31,18 @@ const ItemDetail = (props) => {
             </div>
           </div>
           <div className="w-full md:w-1/2 px-10">
-            <div className="mb-10">
+            <div className="">
               <h1 className="font-bold uppercase text-2xl mb-5">{item.name}</h1>
-              <p className="text-xs text-gray-400 mb-2">Stock: {item.stock}</p>
-
-              <p className="text-sm">{item.cap}</p>
             </div>
 
             <div>
-              <ItemCount />
+              <ItemCount
+                initial={0}
+                price={item.price}
+                stock={item.stock}
+                onAdd={onAdd}
+                cap={item.cap}
+              />
             </div>
           </div>
         </div>
