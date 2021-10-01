@@ -1,15 +1,11 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import { useCartContext } from "../../context/cartContext";
 import { IoTrashOutline } from "react-icons/io5";
-import { GiCook } from "react-icons/gi";
-import emptyCartAnimation from "../../assets/svg/emptyCartAnimation";
 
 const Cart = () => {
   const { cartList, deleteItemFromCart, clearAllCart, totalPrice } =
     useCartContext();
   console.log(cartList);
-
   let subtotal = parseInt(totalPrice()) || 0;
   let coupon = parseInt(subtotal.toFixed(2) * 0.2) || 0;
   let newSubtotal = parseInt(subtotal - coupon || 0).toFixed(2);
@@ -24,148 +20,115 @@ const Cart = () => {
 
   let finalTotal = (newSubtotal - tax).toFixed(2) || 0;
 
-  const [cartIsEmpty, setCartIsEmpty] = useState(
-    "flex bg-gray-100 py-24 justify-center"
-  );
-
-  const cartEmpty = () => {
-    return (
-      <div className={cartIsEmpty}>
-        <div className="p-12 text-center max-w-2xl">
-          {emptyCartAnimation()}
-          <div className="md:text-3xl text-3xl font-bold">
-            Want to buy something for baking ?
-          </div>
-          <div className="text-xl font-normal mt-4">
-            Take a look in our catalog and discover a bunch of baking products.
-          </div>
-          <div className="mt-6 flex justify-center h-12 relative">
-            <Link to="/">
-              <div className="flex shadow-md font-medium place-items-center py-2 px-4 text-gray-100 cursor-pointer bg-yellow-500 rounded text-lg tr-mt">
-                <GiCook className="mr-3" /> GO
-              </div>
-            </Link>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const cartView = (cartList) => {
-    return cartList.map((product) => (
-      <table className="w-full text-sm lg:text-base" cellspacing="0">
-        <thead>
-          <tr className="h-12 uppercase">
-            <th className="hidden md:table-cell"></th>
-            <th className="text-center">Product</th>
-            <th className="lg:text-right text-left pl-5 lg:pl-0">
-              <span className="lg:hidden" title="Quantity">
-                Qtd
-              </span>
-              <span className="hidden lg:inline">Quantity</span>
-            </th>
-            <th className="hidden text-right md:table-cell">Unit price</th>
-            <th className="text-right">Total price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr key={product.newItem.item.id}>
-            <td className="hidden pb-4 md:table-cell">
-              <Link to={`/detail/${product.newItem.item.id}`}>
-                <img
-                  src={
-                    product.newItem.item.img ||
-                    "https://icon-library.com/images/img-icon/img-icon-14.jpg"
-                  }
-                  className="w-auto max-h-20 rounded"
-                  alt="Thumbnail"
-                />
-              </Link>
-            </td>
-            <td className="text-center">
-              <div className="flex place-items-center">
-                <div className="mr-12">
-                  <button
-                    onClick={() => deleteItemFromCart(product)}
-                    className="text-gray-700 md:ml-4"
-                  >
-                    <svg
-                      aria-hidden="true"
-                      data-prefix="far"
-                      data-icon="trash-alt"
-                      className="w-4 text-red-600 hover:text-red-800"
-                      xmlnsName="http://www.w3.org/2000/svg"
-                      viewBox="0 0 448 512"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M268 416h24a12 12 0 0012-12V188a12 12 0 00-12-12h-24a12 12 0 00-12 12v216a12 12 0 0012 12zM432 80h-82.41l-34-56.7A48 48 0 00274.41 0H173.59a48 48 0 00-41.16 23.3L98.41 80H16A16 16 0 000 96v16a16 16 0 0016 16h16v336a48 48 0 0048 48h288a48 48 0 0048-48V128h16a16 16 0 0016-16V96a16 16 0 00-16-16zM171.84 50.91A6 6 0 01177 48h94a6 6 0 015.15 2.91L293.61 80H154.39zM368 464H80V128h288zm-212-48h24a12 12 0 0012-12V188a12 12 0 00-12-12h-24a12 12 0 00-12 12v216a12 12 0 0012 12z"
-                      />
-                    </svg>
-                  </button>
-                </div>
-                <Link to={`/detail/${product.newItem.item.id}`}>
-                  <p className="mb-2 md:ml-4">{product.newItem.item.name}</p>
-                </Link>
-              </div>
-            </td>
-            <td className="justify-center md:justify-end md:flex mt-6">
-              <div className="w-20 h-10">
-                <div className="relative flex flex-row w-full h-8">
-                  <input
-                    id="qty"
-                    type="number"
-                    className="w-full font-semibold text-center text-gray-700 bg-gray-100 outline-none focus:outline-none hover:text-black focus:text-black"
-                    value={product.newItem.totalQty}
-                  />
-                </div>
-              </div>
-            </td>
-            <td className="hidden text-right md:table-cell">
-              <span className="text-sm lg:text-base font-medium">
-                $ {product.newItem.item.price.toFixed(2)}
-              </span>
-            </td>
-            <td className="text-right">
-              <span className="text-sm lg:text-base font-medium">
-                ${" "}
-                {(
-                  product.newItem.totalQty * product.newItem.item.price
-                ).toFixed(2)}
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    ));
-  };
-
   return (
     <>
       <h1 className="text-red-600 text-4xl mt-12">Your Cart</h1>
-      {cartList < 1 ? (
-        ""
-      ) : (
-        <div className="mt-6 flex justify-center">
-          <button
-            onClick={() => {
-              clearAllCart();
-              setCartIsEmpty("flex bg-gray-100 py-24 justify-center");
-            }}
-            className="flex  items-center p-2 rounded-full text-red-500 border-red-500 border-2 bg-white hover:bg-red-500 hover:text-white"
-          >
-            <IoTrashOutline className="mr-2" /> ALL CART
-          </button>
-        </div>
-      )}
+      <div className="mt-6 flex justify-center">
+        <button
+          onClick={() => clearAllCart()}
+          className="flex  items-center p-2 rounded-full text-red-500 border-red-500 border-2 bg-white hover:bg-red-500 hover:text-white"
+        >
+          <IoTrashOutline className="mr-2" /> ALL CART
+        </button>
+      </div>
       <div className="flex justify-center mt-12 mb-6">
         <div className="flex flex-col w-full p-8 text-gray-800 bg-white shadow-2xl pin-r pin-y md:w-4/5 lg:w-4/5">
           <div className="flex-1">
-            {cartList < 1 ? cartEmpty() : cartView(cartList)}
+            <table className="w-full text-sm lg:text-base" cellspacing="0">
+              <thead>
+                <tr className="h-12 uppercase">
+                  <th className="hidden md:table-cell"></th>
+                  <th className="text-center">Product</th>
+                  <th className="lg:text-right text-left pl-5 lg:pl-0">
+                    <span className="lg:hidden" title="Quantity">
+                      Qtd
+                    </span>
+                    <span className="hidden lg:inline">Quantity</span>
+                  </th>
+                  <th className="hidden text-right md:table-cell">
+                    Unit price
+                  </th>
+                  <th className="text-right">Total price</th>
+                </tr>
+              </thead>
+              <tbody>
+                {cartList.map((product) => (
+                  <tr key={product.newItem.item.id}>
+                    <td className="hidden pb-4 md:table-cell">
+                      <Link to={`/detail/${product.newItem.item.id}`}>
+                        <img
+                          src={
+                            product.newItem.item.img ||
+                            "https://icon-library.com/images/img-icon/img-icon-14.jpg"
+                          }
+                          className="w-auto max-h-20 rounded"
+                          alt="Thumbnail"
+                        />
+                      </Link>
+                    </td>
+                    <td className="text-center">
+                      <div className="flex place-items-center">
+                        <div className="mr-12">
+                          <button
+                            onClick={() => deleteItemFromCart(product)}
+                            className="text-gray-700 md:ml-4"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              data-prefix="far"
+                              data-icon="trash-alt"
+                              className="w-4 text-red-600 hover:text-red-800"
+                              xmlnsName="http://www.w3.org/2000/svg"
+                              viewBox="0 0 448 512"
+                            >
+                              <path
+                                fill="currentColor"
+                                d="M268 416h24a12 12 0 0012-12V188a12 12 0 00-12-12h-24a12 12 0 00-12 12v216a12 12 0 0012 12zM432 80h-82.41l-34-56.7A48 48 0 00274.41 0H173.59a48 48 0 00-41.16 23.3L98.41 80H16A16 16 0 000 96v16a16 16 0 0016 16h16v336a48 48 0 0048 48h288a48 48 0 0048-48V128h16a16 16 0 0016-16V96a16 16 0 00-16-16zM171.84 50.91A6 6 0 01177 48h94a6 6 0 015.15 2.91L293.61 80H154.39zM368 464H80V128h288zm-212-48h24a12 12 0 0012-12V188a12 12 0 00-12-12h-24a12 12 0 00-12 12v216a12 12 0 0012 12z"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <Link to={`/detail/${product.newItem.item.id}`}>
+                          <p className="mb-2 md:ml-4">
+                            {product.newItem.item.name}
+                          </p>
+                        </Link>
+                      </div>
+                    </td>
+                    <td className="justify-center md:justify-end md:flex mt-6">
+                      <div className="w-20 h-10">
+                        <div className="relative flex flex-row w-full h-8">
+                          <input
+                            id="qty"
+                            type="number"
+                            className="w-full font-semibold text-center text-gray-700 bg-gray-100 outline-none focus:outline-none hover:text-black focus:text-black"
+                            value={product.newItem.totalQty}
+                          />
+                          {/* <p>{product.newItem.totalQty}</p> */}
+                        </div>
+                      </div>
+                    </td>
+                    <td className="hidden text-right md:table-cell">
+                      <span className="text-sm lg:text-base font-medium">
+                        $ {product.newItem.item.price.toFixed(2)}
+                      </span>
+                    </td>
+                    <td className="text-right">
+                      <span className="text-sm lg:text-base font-medium">
+                        ${" "}
+                        {(
+                          product.newItem.totalQty * product.newItem.item.price
+                        ).toFixed(2)}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
             <hr className="pb-6 mt-6" />
             <div className="my-4 mt-6 -mx-2 lg:flex">
               <div className="lg:px-2 lg:w-1/2">
-                <div className="p-4 bg-gray-200">
+                <div className="p-4 bg-gray-100">
                   <h1 className="ml-2 font-bold uppercase">Coupon Code</h1>
                 </div>
                 <div className="p-4">
@@ -206,7 +169,7 @@ const Cart = () => {
                     </div>
                   </div>
                 </div>
-                <div className="p-4 mt-6 bg-gray-200 ">
+                <div className="p-4 mt-6 bg-gray-100 ">
                   <h1 className="ml-2 font-bold uppercase">
                     Instruction for seller
                   </h1>
@@ -220,7 +183,7 @@ const Cart = () => {
                 </div>
               </div>
               <div className="lg:px-2 lg:w-1/2">
-                <div className="p-4 bg-gray-200">
+                <div className="p-4 bg-gray-100">
                   <h1 className="ml-2 font-bold uppercase">Order Details</h1>
                 </div>
                 <div className="p-4">
@@ -239,7 +202,7 @@ const Cart = () => {
                   <div className="flex justify-between pt-4 border-b">
                     <div className="flex lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-gray-800">
                       <div>
-                        {/* <button type="submit" className="mr-2 mt-1 lg:mt-2">
+                        <button type="submit" className="mr-2 mt-1 lg:mt-2">
                           <svg
                             aria-hidden="true"
                             data-prefix="far"
@@ -253,7 +216,7 @@ const Cart = () => {
                               d="M268 416h24a12 12 0 0012-12V188a12 12 0 00-12-12h-24a12 12 0 00-12 12v216a12 12 0 0012 12zM432 80h-82.41l-34-56.7A48 48 0 00274.41 0H173.59a48 48 0 00-41.16 23.3L98.41 80H16A16 16 0 000 96v16a16 16 0 0016 16h16v336a48 48 0 0048 48h288a48 48 0 0048-48V128h16a16 16 0 0016-16V96a16 16 0 00-16-16zM171.84 50.91A6 6 0 01177 48h94a6 6 0 015.15 2.91L293.61 80H154.39zM368 464H80V128h288zm-212-48h24a12 12 0 0012-12V188a12 12 0 00-12-12h-24a12 12 0 00-12 12v216a12 12 0 0012 12z"
                             />
                           </svg>
-                        </button> */}
+                        </button>
                       </div>
                       Coupon "20off"
                     </div>
