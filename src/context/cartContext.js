@@ -24,7 +24,7 @@ function CartContextProvider({ children }) {
 
   const deleteItemFromCart = (product) => {
     const deleteItem = cartList.filter(
-      (itemToDel) => itemToDel.item.id !== product.newItem.item.id
+      (itemToDel) => itemToDel.newItem.item.id !== product.newItem.item.id
     );
 
     setCartList([...deleteItem]);
@@ -46,7 +46,7 @@ function CartContextProvider({ children }) {
   const totalPrice = () => {
     return cartList.reduce(
       (accum, value) =>
-        parseInt(accum + value.totalQty * value.newItem.item.price),
+        accum + value.newItem.totalQty * value.newItem.item.price,
       0
     );
   };

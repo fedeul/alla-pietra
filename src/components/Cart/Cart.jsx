@@ -10,10 +10,10 @@ const Cart = () => {
     useCartContext();
   console.log(cartList);
 
-  let subtotal = parseInt(totalPrice()) || 0;
-  let coupon = parseInt(subtotal.toFixed(2) * 0.2) || 0;
-  let newSubtotal = parseInt(subtotal - coupon || 0).toFixed(2);
-  let tax = parseInt((0).toFixed(2)) || 0;
+  let subtotal = totalPrice().toFixed(2) || 0;
+  let coupon = (subtotal * 0.2).toFixed(2) || 0;
+  let newSubtotal = (subtotal - coupon).toFixed(2) || 0;
+  let tax = (0).toFixed(2) || 0;
   const taxValue = () => {
     if (tax !== (0).toFixed(2)) {
       return "$ " + tax;
@@ -21,7 +21,7 @@ const Cart = () => {
       return " - ";
     }
   };
-
+  console.log(totalPrice());
   let finalTotal = (newSubtotal - tax).toFixed(2) || 0;
 
   const [cartIsEmpty, setCartIsEmpty] = useState(
@@ -52,92 +52,98 @@ const Cart = () => {
   };
 
   const cartView = (cartList) => {
-    return cartList.map((product) => (
-      <table className="w-full text-sm lg:text-base" cellspacing="0">
-        <thead>
-          <tr className="h-12 uppercase">
-            <th className="hidden md:table-cell"></th>
-            <th className="text-center">Product</th>
-            <th className="lg:text-right text-left pl-5 lg:pl-0">
-              <span className="lg:hidden" title="Quantity">
-                Qtd
-              </span>
-              <span className="hidden lg:inline">Quantity</span>
-            </th>
-            <th className="hidden text-right md:table-cell">Unit price</th>
-            <th className="text-right">Total price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr key={product.newItem.item.id}>
-            <td className="hidden pb-4 md:table-cell">
-              <Link to={`/detail/${product.newItem.item.id}`}>
-                <img
-                  src={
-                    product.newItem.item.img ||
-                    "https://icon-library.com/images/img-icon/img-icon-14.jpg"
-                  }
-                  className="w-auto max-h-20 rounded"
-                  alt="Thumbnail"
-                />
-              </Link>
-            </td>
-            <td className="text-center">
-              <div className="flex place-items-center">
-                <div className="mr-12">
-                  <button
-                    onClick={() => deleteItemFromCart(product)}
-                    className="text-gray-700 md:ml-4"
-                  >
-                    <svg
-                      aria-hidden="true"
-                      data-prefix="far"
-                      data-icon="trash-alt"
-                      className="w-4 text-red-600 hover:text-red-800"
-                      xmlnsName="http://www.w3.org/2000/svg"
-                      viewBox="0 0 448 512"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M268 416h24a12 12 0 0012-12V188a12 12 0 00-12-12h-24a12 12 0 00-12 12v216a12 12 0 0012 12zM432 80h-82.41l-34-56.7A48 48 0 00274.41 0H173.59a48 48 0 00-41.16 23.3L98.41 80H16A16 16 0 000 96v16a16 16 0 0016 16h16v336a48 48 0 0048 48h288a48 48 0 0048-48V128h16a16 16 0 0016-16V96a16 16 0 00-16-16zM171.84 50.91A6 6 0 01177 48h94a6 6 0 015.15 2.91L293.61 80H154.39zM368 464H80V128h288zm-212-48h24a12 12 0 0012-12V188a12 12 0 00-12-12h-24a12 12 0 00-12 12v216a12 12 0 0012 12z"
+    return (
+      <>
+        <table className="w-full text-sm lg:text-base" cellspacing="0">
+          <thead>
+            <tr className="h-12 uppercase">
+              <th className="hidden md:table-cell"></th>
+              <th className="text-center">Product</th>
+              <th className="lg:text-right text-left pl-5 lg:pl-0">
+                <span className="lg:hidden" title="Quantity">
+                  Qtd
+                </span>
+                <span className="hidden lg:inline">Quantity</span>
+              </th>
+              <th className="hidden text-right md:table-cell">Unit price</th>
+              <th className="text-right">Total price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cartList.map((product) => (
+              <tr key={product.newItem.item.id}>
+                <td className="hidden pb-4 md:table-cell">
+                  <Link to={`/detail/${product.newItem.item.id}`}>
+                    <img
+                      src={
+                        product.newItem.item.img ||
+                        "https://icon-library.com/images/img-icon/img-icon-14.jpg"
+                      }
+                      className="w-auto max-h-20 rounded"
+                      alt="Thumbnail"
+                    />
+                  </Link>
+                </td>
+                <td className="text-center">
+                  <div className="flex place-items-center">
+                    <div className="mr-12">
+                      <button
+                        onClick={() => deleteItemFromCart(product)}
+                        className="text-gray-700 md:ml-4"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          data-prefix="far"
+                          data-icon="trash-alt"
+                          className="w-4 text-red-600 hover:text-red-800"
+                          xmlnsName="http://www.w3.org/2000/svg"
+                          viewBox="0 0 448 512"
+                        >
+                          <path
+                            fill="currentColor"
+                            d="M268 416h24a12 12 0 0012-12V188a12 12 0 00-12-12h-24a12 12 0 00-12 12v216a12 12 0 0012 12zM432 80h-82.41l-34-56.7A48 48 0 00274.41 0H173.59a48 48 0 00-41.16 23.3L98.41 80H16A16 16 0 000 96v16a16 16 0 0016 16h16v336a48 48 0 0048 48h288a48 48 0 0048-48V128h16a16 16 0 0016-16V96a16 16 0 00-16-16zM171.84 50.91A6 6 0 01177 48h94a6 6 0 015.15 2.91L293.61 80H154.39zM368 464H80V128h288zm-212-48h24a12 12 0 0012-12V188a12 12 0 00-12-12h-24a12 12 0 00-12 12v216a12 12 0 0012 12z"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                    <Link to={`/detail/${product.newItem.item.id}`}>
+                      <p className="mb-2 md:ml-4">
+                        {product.newItem.item.name}
+                      </p>
+                    </Link>
+                  </div>
+                </td>
+                <td className="justify-center md:justify-end md:flex mt-6">
+                  <div className="w-20 h-10">
+                    <div className="relative flex flex-row w-full h-8">
+                      <input
+                        id="qty"
+                        type="number"
+                        className="w-full font-semibold text-center text-gray-700 bg-gray-100 outline-none focus:outline-none hover:text-black focus:text-black"
+                        value={product.newItem.totalQty}
                       />
-                    </svg>
-                  </button>
-                </div>
-                <Link to={`/detail/${product.newItem.item.id}`}>
-                  <p className="mb-2 md:ml-4">{product.newItem.item.name}</p>
-                </Link>
-              </div>
-            </td>
-            <td className="justify-center md:justify-end md:flex mt-6">
-              <div className="w-20 h-10">
-                <div className="relative flex flex-row w-full h-8">
-                  <input
-                    id="qty"
-                    type="number"
-                    className="w-full font-semibold text-center text-gray-700 bg-gray-100 outline-none focus:outline-none hover:text-black focus:text-black"
-                    value={product.newItem.totalQty}
-                  />
-                </div>
-              </div>
-            </td>
-            <td className="hidden text-right md:table-cell">
-              <span className="text-sm lg:text-base font-medium">
-                $ {product.newItem.item.price.toFixed(2)}
-              </span>
-            </td>
-            <td className="text-right">
-              <span className="text-sm lg:text-base font-medium">
-                ${" "}
-                {(
-                  product.newItem.totalQty * product.newItem.item.price
-                ).toFixed(2)}
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    ));
+                    </div>
+                  </div>
+                </td>
+                <td className="hidden text-right md:table-cell">
+                  <span className="text-sm lg:text-base font-medium">
+                    $ {product.newItem.item.price.toFixed(2)}
+                  </span>
+                </td>
+                <td className="text-right">
+                  <span className="text-sm lg:text-base font-medium">
+                    ${" "}
+                    {(
+                      product.newItem.totalQty * product.newItem.item.price
+                    ).toFixed(2)}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </>
+    );
   };
 
   return (
@@ -269,7 +275,7 @@ const Cart = () => {
                       $ {newSubtotal}
                     </div>
                   </div>
-                  <div className="flex justify-between pt-4 border-b">
+                  <div className="flex justify-between pt-4 ">
                     <div className="lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-center text-gray-800">
                       Tax
                     </div>
@@ -277,11 +283,11 @@ const Cart = () => {
                       {taxValue()}
                     </div>
                   </div>
-                  <div className="flex justify-between pt-4 border-b">
-                    <div className="lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-center text-gray-800">
+                  <div className="flex justify-between items-center  pt-4 bg-yellow-100 text-red-600 border-t border-yellow-600">
+                    <div className="lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-center ">
                       Total
                     </div>
-                    <div className="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">
+                    <div className="lg:px-4 lg:py-2 mx-2 lg:text-lg font-bold text-center">
                       $ {finalTotal}
                     </div>
                   </div>
