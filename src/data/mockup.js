@@ -43,6 +43,7 @@ const itemsCatalog = [
     cap: "🌾 Make different types of loaves - Make regular sourdough breads in our carefully hand-crafted, 9-inch round banneton basket. Hand-made from superior grade Indonesian rattan specially sourced for its quality and durability. Our natural cotton-canvas 30in x 18in proofing cloth / baker's couche is untreated and provides a solid hold to shape your baguettes and smaller bread rolls beautifully.",
     price: 26.56,
     stock: 11,
+    sale: true,
   },
   {
     id: 6,

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import ItemCount from "../Item/ItemCount";
+// import ItemCount from "../Item/ItemCount";
 // import { useCartContext } from "../../context/cartContext";
 
 const Item = (props) => {
@@ -10,7 +10,6 @@ const Item = (props) => {
   // const onAdd = (qty) => {
   //   addToCart({ item: item, qty: qty });
   // };
-  // console.log(addToCart);
 
   return (
     <div
@@ -20,7 +19,13 @@ const Item = (props) => {
       <div className="container flex justify-center ">
         <div className="max-w-sm py-6">
           <div className="h-auto bg-white relative shadow-lg hover:shadow-xl transition duration-500 rounded-lg">
-            <div className="absolute top-2 right-2 py-2 px-4 bg-black text-white rounded-lg shadow-2xl">
+            <div
+              className={
+                item.sale
+                  ? "absolute top-2 right-2 py-2 px-4 bg-red-500 text-white rounded-lg shadow-2xl"
+                  : "absolute top-2 right-2 py-2 px-4 bg-black text-white rounded-lg shadow-2xl"
+              }
+            >
               <span className="text-md">$ {item.price}</span>
             </div>
             <img

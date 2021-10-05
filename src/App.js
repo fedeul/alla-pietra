@@ -3,6 +3,7 @@ import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
 import ItemListContainer from "./components/Containers/ItemListContainer";
 import ItemDetailContainer from "./components/Containers/ItemDetailContainer";
+import ItemSalesContainer from "./components/Containers/ItemSalesContainer";
 import Cart from "./components/Cart/Cart";
 import CartContextProvider from "./context/cartContext";
 
@@ -17,6 +18,7 @@ function App() {
               <ItemListContainer greeting="¡Hola Usuario!" />
             </Route>
             <Route path="/category/:categoryId" component={ItemListContainer} />
+            <Route path="/sales" component={ItemSalesContainer} />
             <Route path="/detail" exact component={ItemDetailContainer} />
             <Route path="/detail/:itemId" component={ItemDetailContainer} />
             <Route path="/cart" exact component={Cart} />

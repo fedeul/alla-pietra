@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import ItemList from "../Item/ItemList";
-import { getItems } from "../../data/mockup";
+// import { getItems } from "../../data/mockup";
+import { getFirestore } from "../../service/getFirebase";
 import { useParams } from "react-router-dom";
 
 const ItemListContainer = ({ greeting }) => {
@@ -9,35 +10,75 @@ const ItemListContainer = ({ greeting }) => {
   const { categoryId } = useParams();
 
   useEffect(() => {
-    //   const dbList = getFirestore();
-    //   dbList
-    //     .collection("ítems")
-    //     .get()
-    //     .then((resp) => console.log(resp))
-    //     .catch((err) => console.log(err))
-    //     .finally(() => setLoading(false));
-    // });
-
     if (categoryId) {
       setTimeout(() => {
-        getItems
-          .then((respuesta) => {
-            setItem(respuesta.filter((item) => item.category === categoryId));
+        const dbList = getFirestore();
+        dbList
+          .collection("items")
+          .where("category", "==", categoryId)
+          .get()
+          .then((data) => {
+            setItem(
+              data.docs.map((items) => ({ id: items.id, ...items.data() }))
+            );
+          })
+          .catch((error) => console.log(error))
+          .finally(() => setLoading(false));
+      }, 500);
+    } else if (!categoryId) {
+      setTimeout(() => {
+        const dbList = getFirestore();
+        dbList
+          .collection("items")
+          .where("sale", "==", true)
+          .get()
+          .then((data) => {
+            setItem(
+              data.docs.map((items) => ({ id: items.id, ...items.data() }))
+            );
           })
           .catch((error) => console.log(error))
           .finally(() => setLoading(false));
       }, 500);
     } else {
       setTimeout(() => {
-        getItems
-          .then((respuesta) => {
-            setItem(respuesta);
+        const dbList = getFirestore();
+        dbList
+          .collection("items")
+          .get()
+          .then((data) => {
+            setItem(
+              data.docs.map((items) => ({ id: items.id, ...items.data() }))
+            );
           })
           .catch((error) => console.log(error))
           .finally(() => setLoading(false));
-      }, 1000);
+      }, 500);
     }
-  }, [categoryId]);
+  }, [categoryId, item.sale]);
+
+  // ++++ LLAMADA AL MOCK UP OFFLINE ++++
+  // if (categoryId) {
+  //   setTimeout(() => {
+  //     getItems
+  //       .then((respuesta) => {
+  //         setItem(respuesta.filter((item) => item.category === categoryId));
+  //       })
+  //       .catch((error) => console.log(error))
+  //       .finally(() => setLoading(false));
+  //   }, 500);
+  // } else {
+  //   setTimeout(() => {
+  //     getItems
+  //       .then((respuesta) => {
+  //         setItem(respuesta);
+  //       })
+  //       .catch((error) => console.log(error))
+  //       .finally(() => setLoading(false));
+  //   }, 500);
+  // }
+  // }, [categoryId];
+
   return (
     <>
       <h2>{greeting}</h2>
