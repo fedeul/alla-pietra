@@ -4,38 +4,82 @@ import { useCartContext } from "../../context/cartContext";
 import { IoTrashOutline } from "react-icons/io5";
 import { GiCook } from "react-icons/gi";
 import emptyCartAnimation from "../../assets/svg/emptyCartAnimation";
-// import firebase from "firebase";
-// import "firebase/firestore";
-// import { getFirestore } from "../../service/getFirebase";
+import firebase from "firebase";
+import "firebase/firestore";
+import { getFirestore } from "../../service/getFirebase";
 
 const Cart = () => {
   const { cartList, deleteItemFromCart, clearAllCart, totalPrice } =
     useCartContext();
 
-  // const [formData, setFormData] = useState({
-  //   name: "",
-  //   phone: "",
-  //   email: "",
-  // });
+  const [userData, setUserData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    extra: "",
+  });
 
-  const handleOnChange = (e) => {};
+  const handleOnChange = (e) => {
+    setUserData({
+      ...userData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-  // const newOrder = () => {
-  //   const db = getFirestore();
+  const newOrder = (e) => {
+    e.preventDefault();
 
-  //   const orderDetail = db.collection("orders");
-  //   let order = {};
-  //   order.date = firebase.firestore.Timestamp.fromDate(new Date());
-  //   order.buyer = { name: "", phone: "", emails: "" };
-  //   order.total = totalPrice();
-  //   order.items = cartList.map((cartItem) => {
-  //     const id = cartItem.item.id;
-  //     const name = cartItem.item.name;
-  //     const price = cartItem.item.price * cartItem.qty;
+    const db = getFirestore();
+    const orders = db.collection("orders");
+    const itemsDB = db.collection("items");
+    let order = {};
+    order.date = firebase.firestore.Timestamp.fromDate(new Date());
+    order.buyer = userData;
+    order.total = totalPrice();
+    order.items = cartList.map((cartItem) => {
+      const id = cartItem.newItem.item.id;
+      const name = cartItem.newItem.item.name;
+      const price = cartItem.newItem.item.price;
+      const qty = cartItem.newItem.totalQty;
+      const subtotal = cartItem.newItem.item.price * cartItem.newItem.totalQty;
 
-  //     return { id, name, price };
-  //   });
-  // };
+      return { id, name, price, qty, subtotal };
+    });
+
+    orders
+      .add(order)
+      .then(
+        setUserData({
+          name: "",
+          phone: "",
+          email: "",
+          extra: "",
+        })
+      )
+      .catch((err) => console.log(err));
+
+    const itemsToUpdate = itemsDB.where(
+      firebase.firestore.FieldPath.documentId(),
+      "in",
+      cartList.map((i) => i.newItem.item.id)
+    );
+
+    const batch = db.batch();
+
+    itemsToUpdate.get().then((collection) => {
+      collection.docs.forEach((docSnapshot) => {
+        batch.update(docSnapshot.ref, {
+          stock:
+            docSnapshot.data().stock -
+            cartList.find((item) => item.newItem.item.id === docSnapshot.id)
+              .newItem.totalQty,
+        });
+      });
+      batch.commit().then((resp) => {
+        console.log("resultado bach:", resp);
+      });
+    });
+  };
 
   let subtotal = totalPrice().toFixed(2) || 0;
   let coupon = (subtotal * 0.2).toFixed(2) || 0;
@@ -88,7 +132,7 @@ const Cart = () => {
               <th className="text-center">Product</th>
               <th className="lg:text-right text-left pl-5 lg:pl-0">
                 <span className="lg:hidden" title="Quantity">
-                  Qtd
+                  Qty
                 </span>
                 <span className="hidden lg:inline">Quantity</span>
               </th>
@@ -157,7 +201,7 @@ const Cart = () => {
                 </td>
                 <td className="hidden text-right md:table-cell">
                   <span className="text-sm lg:text-base font-medium">
-                    $ {product.newItem.item.price.toFixed(2)}
+                    $ {product.newItem.item.price}
                   </span>
                 </td>
                 <td className="text-right">
@@ -173,6 +217,51 @@ const Cart = () => {
           </tbody>
         </table>
       </>
+    );
+  };
+
+  const buttonCheckOutDisabled = () => {
+    return (
+      <button className="cursor-not-allowed mt-10 flex justify-center w-full uppercase  item-center  focus:shadow-outline focus:outline-none bg-gray-400 shadow-md  place-items-center opacity-100 text-gray-600  rounded-full px-10 py-2 font-semibold">
+        <svg
+          aria-hidden="true"
+          data-prefix="far"
+          data-icon="credit-card"
+          className="w-8"
+          xmlnsName="http://www.w3.org/2000/svg"
+          viewBox="0 0 576 512"
+        >
+          <path
+            fill="currentColor"
+            d="M527.9 32H48.1C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48.1 48h479.8c26.6 0 48.1-21.5 48.1-48V80c0-26.5-21.5-48-48.1-48zM54.1 80h467.8c3.3 0 6 2.7 6 6v42H48.1V86c0-3.3 2.7-6 6-6zm467.8 352H54.1c-3.3 0-6-2.7-6-6V256h479.8v170c0 3.3-2.7 6-6 6zM192 332v40c0 6.6-5.4 12-12 12h-72c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12zm192 0v40c0 6.6-5.4 12-12 12H236c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h136c6.6 0 12 5.4 12 12z"
+          />
+        </svg>
+        <span className="ml-2 mt-5px">Procceed to checkout</span>
+      </button>
+    );
+  };
+
+  const buttonCheckOut = () => {
+    return (
+      <button
+        onClick={newOrder}
+        className="mt-10 flex justify-center w-full uppercase  item-center  focus:shadow-outline focus:outline-none bg-yellow-400 shadow-md  place-items-center opacity-75 hover:opacity-100 text-yellow-900 hover:text-gray-900 rounded-full px-10 py-2 font-semibold"
+      >
+        <svg
+          aria-hidden="true"
+          data-prefix="far"
+          data-icon="credit-card"
+          className="w-8"
+          xmlnsName="http://www.w3.org/2000/svg"
+          viewBox="0 0 576 512"
+        >
+          <path
+            fill="currentColor"
+            d="M527.9 32H48.1C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48.1 48h479.8c26.6 0 48.1-21.5 48.1-48V80c0-26.5-21.5-48-48.1-48zM54.1 80h467.8c3.3 0 6 2.7 6 6v42H48.1V86c0-3.3 2.7-6 6-6zm467.8 352H54.1c-3.3 0-6-2.7-6-6V256h479.8v170c0 3.3-2.7 6-6 6zM192 332v40c0 6.6-5.4 12-12 12h-72c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12zm192 0v40c0 6.6-5.4 12-12 12H236c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h136c6.6 0 12 5.4 12 12z"
+          />
+        </svg>
+        <span className="ml-2 mt-5px">Procceed to checkout</span>
+      </button>
     );
   };
 
@@ -255,10 +344,13 @@ const Cart = () => {
                         <input
                           className="py-2 px-3 rounded-lg border-2 border-yellow-300 mt-1 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
                           type="text"
+                          name="name"
+                          id="name"
+                          value={userData.name}
                           placeholder="full name"
+                          required
                         />
                       </div>
-
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
                         <div className="grid grid-cols-1">
                           <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
@@ -267,6 +359,9 @@ const Cart = () => {
                           <input
                             className="py-2 px-3 rounded-lg border-2 border-yellow-300 mt-1 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
                             type="text"
+                            name="email"
+                            id="email"
+                            value={userData.email}
                             placeholder="you@mail.com"
                           />
                         </div>
@@ -277,17 +372,26 @@ const Cart = () => {
                           <input
                             className="py-2 px-3 rounded-lg border-2 border-yellow-300 mt-1 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
                             type="tel"
+                            name="phone"
+                            id="phone"
+                            value={userData.phone}
                             placeholder="Phone"
                           />
                         </div>
                       </div>
+                      <p className="my-4 italic">
+                        If you have some indication for the seller you can leave
+                        them in the box below
+                      </p>
+                      <textarea
+                        className="w-full h-24 p-2 bg-gray-100 rounded focus:ring-yellow-500 focus:border-transparent"
+                        name="extra"
+                        id="extra"
+                      >
+                        {userData.extra}
+                      </textarea>
                     </form>
                   </div>
-                  <p className="my-4 italic">
-                    If you have some indication for the seller you can leave
-                    them in the box below
-                  </p>
-                  <textarea className="w-full h-24 p-2 bg-gray-100 rounded focus:ring-yellow-500 focus:border-transparent"></textarea>
                 </div>
               </div>
               <div className="lg:px-2 lg:w-1/2">
@@ -357,22 +461,9 @@ const Cart = () => {
                     </div>
                   </div>
 
-                  <button className="mt-10 flex justify-center w-full uppercase  item-center  focus:shadow-outline focus:outline-none bg-yellow-400 shadow-md  place-items-center opacity-75 hover:opacity-100 text-yellow-900 hover:text-gray-900 rounded-full px-10 py-2 font-semibold">
-                    <svg
-                      aria-hidden="true"
-                      data-prefix="far"
-                      data-icon="credit-card"
-                      className="w-8"
-                      xmlnsName="http://www.w3.org/2000/svg"
-                      viewBox="0 0 576 512"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M527.9 32H48.1C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48.1 48h479.8c26.6 0 48.1-21.5 48.1-48V80c0-26.5-21.5-48-48.1-48zM54.1 80h467.8c3.3 0 6 2.7 6 6v42H48.1V86c0-3.3 2.7-6 6-6zm467.8 352H54.1c-3.3 0-6-2.7-6-6V256h479.8v170c0 3.3-2.7 6-6 6zM192 332v40c0 6.6-5.4 12-12 12h-72c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12zm192 0v40c0 6.6-5.4 12-12 12H236c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h136c6.6 0 12 5.4 12 12z"
-                      />
-                    </svg>
-                    <span className="ml-2 mt-5px">Procceed to checkout</span>
-                  </button>
+                  {userData.email && userData.name && userData.phone
+                    ? buttonCheckOut()
+                    : buttonCheckOutDisabled()}
                 </div>
               </div>
             </div>

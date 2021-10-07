@@ -1,15 +1,7 @@
 import { Link } from "react-router-dom";
-// import ItemCount from "../Item/ItemCount";
-// import { useCartContext } from "../../context/cartContext";
 
 const Item = (props) => {
   const { item } = props;
-
-  // const { addToCart } = useCartContext();
-
-  // const onAdd = (qty) => {
-  //   addToCart({ item: item, qty: qty });
-  // };
 
   return (
     <div
@@ -48,13 +40,6 @@ const Item = (props) => {
                   MORE
                 </button>
               </Link>
-              {/* <ItemCount
-                initial={0}
-                // qty={qty}
-                price={item.price}
-                stock={item.stock}
-                onAdd={onAdd}
-              /> */}
             </div>
           </div>
         </div>

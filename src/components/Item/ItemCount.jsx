@@ -110,7 +110,16 @@ const ItemCount = ({ initial, stock, onAdd, price, cap }) => {
   return (
     <>
       <div className="mb-10">
-        <p className="text-xs text-gray-400 mb-2">Stock: {newStock}</p>
+        <p className="text-xs text-gray-400 mb-2">
+          Stock:{" "}
+          {newStock < 1 ? (
+            <span class="inline-block rounded-full text-red-500 bg-red-200 px-2 py-1 text-xs font-bold mX-3">
+              NO STOCK
+            </span>
+          ) : (
+            newStock
+          )}
+        </p>
         <p className="text-sm">{cap}</p>
       </div>
       <div className=" my-4 bottom-auto">
