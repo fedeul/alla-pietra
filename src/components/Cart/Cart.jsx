@@ -4,11 +4,38 @@ import { useCartContext } from "../../context/cartContext";
 import { IoTrashOutline } from "react-icons/io5";
 import { GiCook } from "react-icons/gi";
 import emptyCartAnimation from "../../assets/svg/emptyCartAnimation";
+// import firebase from "firebase";
+// import "firebase/firestore";
+// import { getFirestore } from "../../service/getFirebase";
 
 const Cart = () => {
   const { cartList, deleteItemFromCart, clearAllCart, totalPrice } =
     useCartContext();
-  console.log(cartList);
+
+  // const [formData, setFormData] = useState({
+  //   name: "",
+  //   phone: "",
+  //   email: "",
+  // });
+
+  const handleOnChange = (e) => {};
+
+  // const newOrder = () => {
+  //   const db = getFirestore();
+
+  //   const orderDetail = db.collection("orders");
+  //   let order = {};
+  //   order.date = firebase.firestore.Timestamp.fromDate(new Date());
+  //   order.buyer = { name: "", phone: "", emails: "" };
+  //   order.total = totalPrice();
+  //   order.items = cartList.map((cartItem) => {
+  //     const id = cartItem.item.id;
+  //     const name = cartItem.item.name;
+  //     const price = cartItem.item.price * cartItem.qty;
+
+  //     return { id, name, price };
+  //   });
+  // };
 
   let subtotal = totalPrice().toFixed(2) || 0;
   let coupon = (subtotal * 0.2).toFixed(2) || 0;
@@ -21,7 +48,7 @@ const Cart = () => {
       return " - ";
     }
   };
-  console.log(totalPrice());
+
   let finalTotal = (newSubtotal - tax).toFixed(2) || 0;
 
   const [cartIsEmpty, setCartIsEmpty] = useState(
@@ -115,13 +142,16 @@ const Cart = () => {
                 </td>
                 <td className="justify-center md:justify-end md:flex mt-6">
                   <div className="w-20 h-10">
-                    <div className="relative flex flex-row w-full h-8">
-                      <input
+                    <div className="relative flex flex-row w-full place-items-center text-base h-8">
+                      {/* <input
                         id="qty"
                         type="number"
                         className="w-full font-semibold text-center text-gray-700 bg-gray-100 outline-none focus:outline-none hover:text-black focus:text-black"
                         value={product.newItem.totalQty}
-                      />
+                      /> */}
+                      <p className="w-full font-semibold text-center text-gray-700 outline-none focus:outline-none hover:text-black focus:text-black">
+                        {product.newItem.totalQty}
+                      </p>
                     </div>
                   </div>
                 </td>
@@ -213,16 +243,51 @@ const Cart = () => {
                   </div>
                 </div>
                 <div className="p-4 mt-6 bg-gray-200 ">
-                  <h1 className="ml-2 font-bold uppercase">
-                    Instruction for seller
-                  </h1>
+                  <h1 className="ml-2 font-bold uppercase">Contact details</h1>
                 </div>
                 <div className="p-4">
-                  <p className="mb-4 italic">
-                    If you have some indivation for the seller you can leave
+                  <div className="lg:col-span-2 text-left">
+                    <form onChange={handleOnChange}>
+                      <div className="grid grid-cols-1 mt-5 mx-7">
+                        <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+                          Full name
+                        </label>
+                        <input
+                          className="py-2 px-3 rounded-lg border-2 border-yellow-300 mt-1 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                          type="text"
+                          placeholder="full name"
+                        />
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
+                        <div className="grid grid-cols-1">
+                          <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+                            Email
+                          </label>
+                          <input
+                            className="py-2 px-3 rounded-lg border-2 border-yellow-300 mt-1 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                            type="text"
+                            placeholder="you@mail.com"
+                          />
+                        </div>
+                        <div className="grid grid-cols-1">
+                          <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+                            Phone
+                          </label>
+                          <input
+                            className="py-2 px-3 rounded-lg border-2 border-yellow-300 mt-1 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                            type="tel"
+                            placeholder="Phone"
+                          />
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <p className="my-4 italic">
+                    If you have some indication for the seller you can leave
                     them in the box below
                   </p>
-                  <textarea className="w-full h-24 p-2 bg-gray-100 rounded"></textarea>
+                  <textarea className="w-full h-24 p-2 bg-gray-100 rounded focus:ring-yellow-500 focus:border-transparent"></textarea>
                 </div>
               </div>
               <div className="lg:px-2 lg:w-1/2">

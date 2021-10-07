@@ -14,9 +14,12 @@ const ItemListContainer = ({ greeting }) => {
         .collection("items")
         .where("sale", "==", true)
         .get()
-        .then((data) => {
+        .then((firebaseData) => {
           setItem(
-            data.docs.map((items) => ({ id: items.id, ...items.data() }))
+            firebaseData.docs.map((items) => ({
+              id: items.id,
+              ...items.data(),
+            }))
           );
         })
         .catch((error) => console.log(error))
@@ -25,7 +28,6 @@ const ItemListContainer = ({ greeting }) => {
   }, []);
 
   // ++++ LLAMADA AL MOCK UP OFFLINE ++++
-
   //   setTimeout(() => {
   //     getItems
   //       .then((respuesta) => {

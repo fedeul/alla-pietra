@@ -142,7 +142,6 @@ const ItemCount = ({ initial, stock, onAdd, price, cap }) => {
         <span className="font-bold text-2xl "> {totalPrice}</span>
       </h1>
       {cartList < 1 ? "" : <ButtonGoToCart />}
-      {console.log(cartList)}
     </>
   );
 };

@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import ItemList from "../Item/ItemList";
+import { useParams } from "react-router-dom";
 // import { getItems } from "../../data/mockup";
 import { getFirestore } from "../../service/getFirebase";
-import { useParams } from "react-router-dom";
 
 const ItemListContainer = ({ greeting }) => {
   const [item, setItem] = useState([]);
@@ -25,59 +25,47 @@ const ItemListContainer = ({ greeting }) => {
           .catch((error) => console.log(error))
           .finally(() => setLoading(false));
       }, 500);
-    } else if (!categoryId) {
-      setTimeout(() => {
-        const dbList = getFirestore();
-        dbList
-          .collection("items")
-          .where("sale", "==", true)
-          .get()
-          .then((data) => {
-            setItem(
-              data.docs.map((items) => ({ id: items.id, ...items.data() }))
-            );
-          })
-          .catch((error) => console.log(error))
-          .finally(() => setLoading(false));
-      }, 500);
     } else {
       setTimeout(() => {
         const dbList = getFirestore();
         dbList
           .collection("items")
           .get()
-          .then((data) => {
+          .then((firebaseData) => {
             setItem(
-              data.docs.map((items) => ({ id: items.id, ...items.data() }))
+              firebaseData.docs.map((items) => ({
+                id: items.id,
+                ...items.data(),
+              }))
             );
           })
           .catch((error) => console.log(error))
           .finally(() => setLoading(false));
       }, 500);
     }
-  }, [categoryId, item.sale]);
+  }, [categoryId]);
 
   // ++++ LLAMADA AL MOCK UP OFFLINE ++++
-  // if (categoryId) {
-  //   setTimeout(() => {
-  //     getItems
-  //       .then((respuesta) => {
-  //         setItem(respuesta.filter((item) => item.category === categoryId));
-  //       })
-  //       .catch((error) => console.log(error))
-  //       .finally(() => setLoading(false));
-  //   }, 500);
-  // } else {
-  //   setTimeout(() => {
-  //     getItems
-  //       .then((respuesta) => {
-  //         setItem(respuesta);
-  //       })
-  //       .catch((error) => console.log(error))
-  //       .finally(() => setLoading(false));
-  //   }, 500);
-  // }
-  // }, [categoryId];
+  //   if (categoryId) {
+  //     setTimeout(() => {
+  //       getItems
+  //         .then((respuesta) => {
+  //           setItem(respuesta.filter((item) => item.category === categoryId));
+  //         })
+  //         .catch((error) => console.log(error))
+  //         .finally(() => setLoading(false));
+  //     }, 500);
+  //   } else {
+  //     setTimeout(() => {
+  //       getItems
+  //         .then((respuesta) => {
+  //           setItem(respuesta);
+  //         })
+  //         .catch((error) => console.log(error))
+  //         .finally(() => setLoading(false));
+  //     }, 500);
+  //   }
+  // }, [categoryId]);
 
   return (
     <>
