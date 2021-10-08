@@ -13,7 +13,6 @@ const ItemCount = ({ initial, stock, onAdd, price, cap }) => {
 
   const ButtonZeroItem = () => {
     return (
-      // <Link to="/cart">
       <button
         onClick={handlerOnAdd}
         className="bg-yellow-400 shadow-md  flex place-items-center opacity-75 hover:opacity-100 text-yellow-900 hover:text-gray-900 rounded-full px-7 py-2 font-semibold"

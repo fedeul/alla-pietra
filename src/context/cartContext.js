@@ -43,6 +43,10 @@ function CartContextProvider({ children }) {
     }
   };
 
+  const orderFinished = () => {
+    setCartList([]);
+  };
+
   const totalPrice = () => {
     return cartList.reduce(
       (accum, value) =>
@@ -62,6 +66,7 @@ function CartContextProvider({ children }) {
         clearAllCart,
         totalPrice,
         deleteItemFromCart,
+        orderFinished,
       }}
     >
       {children}

@@ -3,14 +3,23 @@ import { useState } from "react";
 import { useCartContext } from "../../context/cartContext";
 import { IoTrashOutline } from "react-icons/io5";
 import { GiCook } from "react-icons/gi";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 import emptyCartAnimation from "../../assets/svg/emptyCartAnimation";
 import firebase from "firebase";
 import "firebase/firestore";
 import { getFirestore } from "../../service/getFirebase";
 
 const Cart = () => {
-  const { cartList, deleteItemFromCart, clearAllCart, totalPrice } =
-    useCartContext();
+  const {
+    cartList,
+    deleteItemFromCart,
+    clearAllCart,
+    totalPrice,
+    orderFinished,
+  } = useCartContext();
+
+  const [coupon, setCoupon] = useState("off");
+  const [showModal, setShowModal] = useState(false);
 
   const [userData, setUserData] = useState({
     name: "",
@@ -79,11 +88,19 @@ const Cart = () => {
         console.log("resultado bach:", resp);
       });
     });
+    orderFinished();
+    setShowModal(true);
   };
 
   let subtotal = totalPrice().toFixed(2) || 0;
-  let coupon = (subtotal * 0.2).toFixed(2) || 0;
-  let newSubtotal = (subtotal - coupon).toFixed(2) || 0;
+  const withCoupon = () => {
+    if (coupon === "on") {
+      return parseInt((subtotal * 0.2).toFixed(2));
+    } else {
+      return 0;
+    }
+  };
+  let newSubtotal = (subtotal - withCoupon()).toFixed(2) || 0;
   let tax = (0).toFixed(2) || 0;
   const taxValue = () => {
     if (tax !== (0).toFixed(2)) {
@@ -265,6 +282,41 @@ const Cart = () => {
     );
   };
 
+  const couponRow = () => {
+    return (
+      <>
+        <div className="flex justify-between pt-4 border-b">
+          <div className="flex lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-gray-800">
+            <div>
+              <button
+                onClick={() => setCoupon("off")}
+                className="mr-2 mt-1 lg:mt-2"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-prefix="far"
+                  data-icon="trash-alt"
+                  className="w-4 text-red-600 hover:text-red-800"
+                  xmlnsName="http://www.w3.org/2000/svg"
+                  viewBox="0 0 448 512"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M268 416h24a12 12 0 0012-12V188a12 12 0 00-12-12h-24a12 12 0 00-12 12v216a12 12 0 0012 12zM432 80h-82.41l-34-56.7A48 48 0 00274.41 0H173.59a48 48 0 00-41.16 23.3L98.41 80H16A16 16 0 000 96v16a16 16 0 0016 16h16v336a48 48 0 0048 48h288a48 48 0 0048-48V128h16a16 16 0 0016-16V96a16 16 0 00-16-16zM171.84 50.91A6 6 0 01177 48h94a6 6 0 015.15 2.91L293.61 80H154.39zM368 464H80V128h288zm-212-48h24a12 12 0 0012-12V188a12 12 0 00-12-12h-24a12 12 0 00-12 12v216a12 12 0 0012 12z"
+                  />
+                </svg>
+              </button>
+            </div>
+            Coupon "20off"
+          </div>
+          <div className="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-green-700">
+            - $ {withCoupon()}
+          </div>
+        </div>
+      </>
+    );
+  };
+
   return (
     <>
       <h1 className="text-red-600 text-4xl mt-12">Your Cart</h1>
@@ -309,7 +361,7 @@ const Cart = () => {
                           className="w-full text-center bg-gray-100 outline-none appearance-none focus:outline-none active:outline-none"
                         />
                         <button
-                          type="submit"
+                          onClick={() => setCoupon("on")}
                           className="text-sm flex items-center px-3 py-1 text-white bg-gray-800 rounded-full outline-none md:px-4 hover:bg-gray-700 focus:outline-none active:outline-none"
                         >
                           <svg
@@ -348,7 +400,6 @@ const Cart = () => {
                           id="name"
                           value={userData.name}
                           placeholder="full name"
-                          required
                         />
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
@@ -399,10 +450,6 @@ const Cart = () => {
                   <h1 className="ml-2 font-bold uppercase">Order Details</h1>
                 </div>
                 <div className="p-4">
-                  <p className="mb-6 italic">
-                    Shipping and additionnal costs are calculated based on
-                    values you have entered
-                  </p>
                   <div className="flex justify-between border-b">
                     <div className="lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-center text-gray-800">
                       Subtotal
@@ -411,31 +458,7 @@ const Cart = () => {
                       $ {subtotal}
                     </div>
                   </div>
-                  <div className="flex justify-between pt-4 border-b">
-                    <div className="flex lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-gray-800">
-                      <div>
-                        {/* <button type="submit" className="mr-2 mt-1 lg:mt-2">
-                          <svg
-                            aria-hidden="true"
-                            data-prefix="far"
-                            data-icon="trash-alt"
-                            className="w-4 text-red-600 hover:text-red-800"
-                            xmlnsName="http://www.w3.org/2000/svg"
-                            viewBox="0 0 448 512"
-                          >
-                            <path
-                              fill="currentColor"
-                              d="M268 416h24a12 12 0 0012-12V188a12 12 0 00-12-12h-24a12 12 0 00-12 12v216a12 12 0 0012 12zM432 80h-82.41l-34-56.7A48 48 0 00274.41 0H173.59a48 48 0 00-41.16 23.3L98.41 80H16A16 16 0 000 96v16a16 16 0 0016 16h16v336a48 48 0 0048 48h288a48 48 0 0048-48V128h16a16 16 0 0016-16V96a16 16 0 00-16-16zM171.84 50.91A6 6 0 01177 48h94a6 6 0 015.15 2.91L293.61 80H154.39zM368 464H80V128h288zm-212-48h24a12 12 0 0012-12V188a12 12 0 00-12-12h-24a12 12 0 00-12 12v216a12 12 0 0012 12z"
-                            />
-                          </svg>
-                        </button> */}
-                      </div>
-                      Coupon "20off"
-                    </div>
-                    <div className="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-green-700">
-                      - $ {coupon}
-                    </div>
-                  </div>
+                  {coupon === "off" ? "" : couponRow()}
                   <div className="flex justify-between pt-4 border-b">
                     <div className="lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-center text-gray-800">
                       New Subtotal
@@ -461,7 +484,10 @@ const Cart = () => {
                     </div>
                   </div>
 
-                  {userData.email && userData.name && userData.phone
+                  {userData.email &&
+                  userData.name &&
+                  userData.phone &&
+                  finalTotal > 0
                     ? buttonCheckOut()
                     : buttonCheckOutDisabled()}
                 </div>
@@ -470,8 +496,50 @@ const Cart = () => {
           </div>
         </div>
       </div>
+
+      {showModal ? (
+        <>
+          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+              {/*content*/}
+              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                {/*header*/}
+                <div className="flex items-start justify-between p-5  rounded-t">
+                  <h3 className="text-3xl font-semibold">
+                    Your order is in process
+                  </h3>
+                </div>
+                {/*body*/}
+                <div className="relative p-6 flex-auto">
+                  <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
+                    Thanks for shopping with us. Check your inbox on the next
+                    two days for updates about your order.
+                  </p>
+                </div>
+                {/*footer*/}
+                <div className="flex items-center justify-end p-6 rounded-b">
+                  <Link to="/">
+                    <button
+                      className="flex place-items-center bg-emerald-500 text-white bg-yellow-500 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      type="button"
+                      onClick={() => setShowModal(false)}
+                    >
+                      <GiCook className="mr-3" /> CONTINUE SHOPPING
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+        </>
+      ) : null}
     </>
   );
 };
+
+export function userData() {
+  return;
+}
 
 export default Cart;

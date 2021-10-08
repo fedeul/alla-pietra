@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import ItemList from "../Item/ItemList";
 import { useParams } from "react-router-dom";
-// import { getItems } from "../../data/mockup";
 import { getFirestore } from "../../service/getFirebase";
 
 const ItemListContainer = ({ greeting }) => {
@@ -44,28 +43,6 @@ const ItemListContainer = ({ greeting }) => {
       }, 500);
     }
   }, [categoryId]);
-
-  // ++++ LLAMADA AL MOCK UP OFFLINE ++++
-  //   if (categoryId) {
-  //     setTimeout(() => {
-  //       getItems
-  //         .then((respuesta) => {
-  //           setItem(respuesta.filter((item) => item.category === categoryId));
-  //         })
-  //         .catch((error) => console.log(error))
-  //         .finally(() => setLoading(false));
-  //     }, 500);
-  //   } else {
-  //     setTimeout(() => {
-  //       getItems
-  //         .then((respuesta) => {
-  //           setItem(respuesta);
-  //         })
-  //         .catch((error) => console.log(error))
-  //         .finally(() => setLoading(false));
-  //     }, 500);
-  //   }
-  // }, [categoryId]);
 
   return (
     <>

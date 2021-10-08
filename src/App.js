@@ -6,6 +6,7 @@ import ItemDetailContainer from "./components/Containers/ItemDetailContainer";
 import ItemSalesContainer from "./components/Containers/ItemSalesContainer";
 import Cart from "./components/Cart/Cart";
 import CartContextProvider from "./context/cartContext";
+import OrderConfirmation from "./components/Cart/OrderConfirmation";
 
 function App() {
   return (
@@ -22,6 +23,11 @@ function App() {
             <Route path="/detail" exact component={ItemDetailContainer} />
             <Route path="/detail/:itemId" component={ItemDetailContainer} />
             <Route path="/cart" exact component={Cart} />
+            <Route
+              path="/order-confirmation"
+              exact
+              component={OrderConfirmation}
+            />
           </Switch>
         </div>
       </BrowserRouter>
