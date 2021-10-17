@@ -7,6 +7,10 @@ import ItemSalesContainer from "./components/Containers/ItemSalesContainer";
 import Cart from "./components/Cart/Cart";
 import CartContextProvider from "./context/cartContext";
 import OrderConfirmation from "./components/Cart/OrderConfirmation";
+import Home from "./components/html/Home/Home";
+import Footer from "./components/html/Footer";
+import MobileNav from "./components/NavBar/MobileNav";
+import About from "./components/html/About";
 
 function App() {
   return (
@@ -15,11 +19,11 @@ function App() {
         <div className="App">
           <NavBar />
           <Switch>
-            <Route path="/" exact>
-              <ItemListContainer greeting="¡Hola Usuario!" />
-            </Route>
+            <Route path="/" exact component={Home} />
             <Route path="/category/:categoryId" component={ItemListContainer} />
+            <Route path="/category" component={ItemListContainer} />
             <Route path="/sales" component={ItemSalesContainer} />
+            <Route path="/about" component={About} />
             <Route path="/detail" exact component={ItemDetailContainer} />
             <Route path="/detail/:itemId" component={ItemDetailContainer} />
             <Route path="/cart" exact component={Cart} />
@@ -29,6 +33,8 @@ function App() {
               component={OrderConfirmation}
             />
           </Switch>
+          <Footer />
+          <MobileNav />
         </div>
       </BrowserRouter>
     </CartContextProvider>

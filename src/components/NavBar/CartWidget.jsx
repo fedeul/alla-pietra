@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useCartContext } from "../../context/cartContext";
+import cartIcon from "../../assets/svg/cartIcon";
 
 const CartWidget = () => {
   const { iconCart, cartList } = useCartContext();
@@ -9,7 +10,8 @@ const CartWidget = () => {
       {cartList < 1 ? (
         <div className="flex justify-center md:block">
           <div className="relative text-gray-300 dark:text-gray-200 ">
-            <svg
+            {cartIcon()}
+            {/* <svg
               className="w-5 h-5"
               viewBox="0 0 24 24"
               fill="none"
@@ -24,7 +26,7 @@ const CartWidget = () => {
                 fill-opacity="0.5"
                 value="3"
               ></path>
-            </svg>
+            </svg> */}
             <span className="absolute bottom-3 right-3 p-1 px-2 text-xs text-white bg-white bg-opacity-0  rounded-full">
               <span className="bg-opacity-0 p-1 px-2"></span>
             </span>
@@ -34,7 +36,8 @@ const CartWidget = () => {
         <Link to="/cart">
           <div className="flex justify-center md:block">
             <button className="relative text-gray-700 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-300">
-              <svg
+              {cartIcon()}
+              {/* <svg
                 className="w-5 h-5"
                 viewBox="0 0 24 24"
                 fill="none"
@@ -47,8 +50,8 @@ const CartWidget = () => {
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   value="3"
-                ></path>
-              </svg>
+                ></path> 
+              </svg>*/}
               <span className="absolute bottom-3 right-3 p-1 px-2 text-xs text-white bg-green-500 bg-opacity-75 hover:bg-opacity-75 hover:bg-yellow-500 rounded-full">
                 <span className="bg-opacity-100">{iconCart()}</span>
               </span>

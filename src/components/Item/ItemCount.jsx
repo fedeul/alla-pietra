@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCartContext } from "../../context/cartContext";
+import cartIcon from "../../assets/svg/cartIcon";
 
 const ItemCount = ({ initial, stock, onAdd, price, cap }) => {
   const { cartList } = useCartContext();
@@ -11,52 +12,34 @@ const ItemCount = ({ initial, stock, onAdd, price, cap }) => {
     setButtonType("add");
   };
 
+  const buttonAdd = () => {
+    return (
+      <>
+        ADD TO
+        {cartIcon()}
+      </>
+    );
+  };
+
+  const styleZero = () => {
+    return "bg-gray-300 shadow-md text-sm flex place-items-center  text-gray-400  rounded-full px-7 py-2 font-semibold";
+  };
+
+  const styleNonZero = () => {
+    return "bg-yellow-400 shadow-md text-sm flex place-items-center opacity-75 hover:opacity-100 text-yellow-900 hover:text-gray-900 rounded-full px-7 py-2 font-semibold";
+  };
+
   const ButtonZeroItem = () => {
     return (
-      <button
-        onClick={handlerOnAdd}
-        className="bg-yellow-400 shadow-md  flex place-items-center opacity-75 hover:opacity-100 text-yellow-900 hover:text-gray-900 rounded-full px-7 py-2 font-semibold"
-      >
-        ADD TO
-        <svg
-          className="w-5 h-7 ml-4"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.70711 15.2929C4.07714 15.9229 4.52331 17 5.41421 17H17M17 17C15.8954 17 15 17.8954 15 19C15 20.1046 15.8954 21 17 21C18.1046 21 19 20.1046 19 19C19 17.8954 18.1046 17 17 17ZM9 19C9 20.1046 8.10457 21 7 21C5.89543 21 5 20.1046 5 19C5 17.8954 5.89543 17 7 17C8.10457 17 9 17.8954 9 19Z"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
+      <button onClick={handlerOnAdd} className={styleNonZero()}>
+        {buttonAdd()}
       </button>
     );
   };
 
   const ButtonAddToCart = ({ handleButtonChange }) => {
     handleButtonChange();
-    return (
-      <button className="bg-gray-300 shadow-md  flex place-items-center  text-gray-400  rounded-full px-7 py-2 font-semibold">
-        ADD TO
-        <svg
-          className="w-5 h-5 ml-4"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.70711 15.2929C4.07714 15.9229 4.52331 17 5.41421 17H17M17 17C15.8954 17 15 17.8954 15 19C15 20.1046 15.8954 21 17 21C18.1046 21 19 20.1046 19 19C19 17.8954 18.1046 17 17 17ZM9 19C9 20.1046 8.10457 21 7 21C5.89543 21 5 20.1046 5 19C5 17.8954 5.89543 17 7 17C8.10457 17 9 17.8954 9 19Z"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </button>
-    );
+    return <button className={styleZero()}>{buttonAdd()}</button>;
   };
 
   const ButtonGoToCart = () => {
@@ -65,20 +48,7 @@ const ItemCount = ({ initial, stock, onAdd, price, cap }) => {
         <Link to="/cart">
           <button className="bg-green-400 shadow-md flex justify-center items-center text-center opacity-75 hover:opacity-100 text-gray-900 hover:text-gray-900 hover:shadow-xl w-full mt-3 px-7 py-2 font-semibold">
             GO TO
-            <svg
-              className="w-5 h-7 ml-4"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.70711 15.2929C4.07714 15.9229 4.52331 17 5.41421 17H17M17 17C15.8954 17 15 17.8954 15 19C15 20.1046 15.8954 21 17 21C18.1046 21 19 20.1046 19 19C19 17.8954 18.1046 17 17 17ZM9 19C9 20.1046 8.10457 21 7 21C5.89543 21 5 20.1046 5 19C5 17.8954 5.89543 17 7 17C8.10457 17 9 17.8954 9 19Z"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+            {cartIcon()}
           </button>
         </Link>
       </>
@@ -112,7 +82,7 @@ const ItemCount = ({ initial, stock, onAdd, price, cap }) => {
         <p className="text-xs text-gray-400 mb-2">
           Stock:{" "}
           {newStock < 1 ? (
-            <span class="inline-block rounded-full text-red-500 bg-red-200 px-2 py-1 text-xs font-bold mX-3">
+            <span className="inline-block rounded-full text-red-500 bg-red-200 px-2 py-1 text-xs font-bold mX-3">
               NO STOCK
             </span>
           ) : (

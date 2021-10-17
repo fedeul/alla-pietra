@@ -33,8 +33,16 @@ const ItemDetailContainer = () => {
           <div className="loading"></div>
         </div>
       ) : (
-        <div className="h-full">
-          <ItemDetail item={item} />
+        <div
+          className="h-full"
+          style={{
+            backgroundImage:
+              "url(https://st2.depositphotos.com/4966263/7580/v/950/depositphotos_75802887-stock-illustration-hand-drawn-bakery-pattern.jpg)",
+          }}
+        >
+          <div style={{ backgroundColor: "#fffffff0" }}>
+            <ItemDetail item={item} />
+          </div>
         </div>
       )}
     </>

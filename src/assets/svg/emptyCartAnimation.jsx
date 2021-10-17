@@ -1,7 +1,7 @@
 const emptyCartAnimation = () => {
   return (
     <>
-      <div class="empty-cart max-w-xl">
+      <div className="empty-cart max-w-xl">
         <svg id="svgAnim" viewBox="656 573 264 182" version="1.1">
           <rect
             id="bg-line"

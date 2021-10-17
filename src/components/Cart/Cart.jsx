@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useCartContext } from "../../context/cartContext";
 import { IoTrashOutline } from "react-icons/io5";
 import { GiCook } from "react-icons/gi";
-import { AiOutlineCloseCircle } from "react-icons/ai";
 import emptyCartAnimation from "../../assets/svg/emptyCartAnimation";
 import firebase from "firebase";
 import "firebase/firestore";
@@ -204,12 +203,6 @@ const Cart = () => {
                 <td className="justify-center md:justify-end md:flex mt-6">
                   <div className="w-20 h-10">
                     <div className="relative flex flex-row w-full place-items-center text-base h-8">
-                      {/* <input
-                        id="qty"
-                        type="number"
-                        className="w-full font-semibold text-center text-gray-700 bg-gray-100 outline-none focus:outline-none hover:text-black focus:text-black"
-                        value={product.newItem.totalQty}
-                      /> */}
                       <p className="w-full font-semibold text-center text-gray-700 outline-none focus:outline-none hover:text-black focus:text-black">
                         {product.newItem.totalQty}
                       </p>
