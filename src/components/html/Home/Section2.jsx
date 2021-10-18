@@ -8,7 +8,7 @@ const Section2 = () => {
           <img
             alt="..."
             className="max-w-full rounded-lg shadow-lg"
-            src="http://allapietra.eldiletante.com.ar/wp-content/uploads/2021/02/oven2.jpg "
+            src="//allapietra.eldiletante.com.ar/wp-content/uploads/2021/02/oven2.jpg "
           />
         </div>
         <div className="w-full md:w-5/12 ml-auto mr-auto px-4">

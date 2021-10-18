@@ -54,11 +54,10 @@ const ItemListContainer = () => {
         }}
       >
         <div style={{ backgroundColor: "#fffffff0" }}>
+          {NavCategories()}
           <h3 className="text-3xl py-8 font-bold text-yellow-600 uppercase">
             {categoryId || "All products"}
           </h3>
-
-          {NavCategories()}
 
           {loading ? (
             <div className="loading-wrap">
