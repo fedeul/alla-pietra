@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const NavCategories = () => {
   return (
     <>
-      <div className="flex bg-gray-100 shadow-2xl rounded-2xl ">
+      <div className="md:hidden flex bg-gray-100 shadow-2xl rounded-2xl ">
         <div>
           <span className="block px-1 group-hover:border-green-400 group-hover:border-solid ">
             <i className="fas fa-filter flex items-center place-items-center text-center mx-auto px-4 py-3 text-green-500"></i>
