@@ -1,8 +1,12 @@
 ![Almacen Panadero](https://github.com/fedeul/almacen-panadero/raw/main/src/assets/img/logo.png)
 
-This is an E-commerce developed using React JS
+This is an E-commerce developed using React JS.
 
-![Animation: Almacen Panadero](https://github.com/fedeul/almacen-panadero/raw/main/src/assets/img/AlmacenPanaderoAnimation.gif)
+Proyecto creado durante el curso REACT JS en Coder House, dictado durante 2 meses (2 clases de 2 horas por semana)
+
+## Atributions
+
+Creative Tim, joker banny, Scott Windon [https://tailwindcomponents.com/](https://tailwindcomponents.com/)
 
 ## Licenses
 
@@ -14,4 +18,4 @@ Add badges from somewhere like: [shields.io](https://shields.io/)
 
 ## My website
 
-[![THE MONTAIN CODE](https://www.themountaincode.com/images/isologo.png)](https://www.themountaincode.com)
+[![DASHBOARD](https://www.dashboard.ltd/images/isologo.png)](https://www.dashboard.ltd)
