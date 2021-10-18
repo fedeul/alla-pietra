@@ -6,7 +6,6 @@ import ItemDetailContainer from "./components/Containers/ItemDetailContainer";
 import ItemSalesContainer from "./components/Containers/ItemSalesContainer";
 import Cart from "./components/Cart/Cart";
 import CartContextProvider from "./context/cartContext";
-import OrderConfirmation from "./components/Cart/OrderConfirmation";
 import Home from "./components/html/Home/Home";
 import Footer from "./components/html/Footer";
 import MobileNav from "./components/NavBar/MobileNav";
@@ -27,11 +26,6 @@ function App() {
             <Route path="/detail" exact component={ItemDetailContainer} />
             <Route path="/detail/:itemId" component={ItemDetailContainer} />
             <Route path="/cart" exact component={Cart} />
-            <Route
-              path="/order-confirmation"
-              exact
-              component={OrderConfirmation}
-            />
           </Switch>
           <Footer />
           <MobileNav />

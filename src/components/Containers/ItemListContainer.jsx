@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import ItemList from "../Item/ItemList";
 import { useParams } from "react-router-dom";
 import { getFirestore } from "../../service/getFirebase";
+import NavCategories from "../NavBar/NavCategories";
 
-const ItemListContainer = ({ greeting }) => {
+const ItemListContainer = () => {
   const [item, setItem] = useState([]);
   const [loading, setLoading] = useState(true);
   const { categoryId } = useParams();
@@ -56,6 +57,8 @@ const ItemListContainer = ({ greeting }) => {
           <h3 className="text-3xl py-8 font-bold text-yellow-600 uppercase">
             {categoryId || "All products"}
           </h3>
+
+          {NavCategories()}
 
           {loading ? (
             <div className="loading-wrap">

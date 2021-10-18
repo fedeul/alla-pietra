@@ -72,8 +72,96 @@ const About = () => {
                     superior de Creativos Publicitarios
                   </div>
                 </div>
+                <div className="md:hidden">
+                  <div className="w-full lg:w-7/12 px-0">
+                    <div className="flex flex-wrap items-top mb-6">
+                      <div className="w-full lg:w-7/12 px-2 ml-auto">
+                        <div className="mt-6 lg:mb-0 mb-6">
+                          <a
+                            href="https://www.dashboard.ltd"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            {" "}
+                            <button
+                              className="bg-gray-100 hover:bg-yellow-100 text-yellow-500 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                              type="button"
+                            >
+                              <i class="fas fa-toggle-on"></i>
+                            </button>
+                          </a>
+                          <a
+                            href="https://dribbble.com/fedeul"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            {" "}
+                            <button
+                              className="bg-gray-100 hover:bg-yellow-100 text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                              type="button"
+                            >
+                              <i className="fab fa-dribbble"></i>
+                            </button>
+                          </a>
+                          <a
+                            href="https://github.com/fedeul"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            {" "}
+                            <button
+                              className="bg-gray-100 hover:bg-yellow-100 text-gray-800 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                              type="button"
+                            >
+                              <i className="fab fa-github"></i>
+                            </button>
+                          </a>
+                          <a
+                            href="https://linkedin.com/in/fedeul"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            {" "}
+                            <button
+                              className="bg-gray-100 hover:bg-yellow-100 text-blue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                              type="button"
+                            >
+                              <i className="fab fa-linkedin"></i>
+                            </button>
+                          </a>
+                          <a
+                            href="https://instagram.com/proyectosdiletantes"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            {" "}
+                            <button
+                              className="bg-gray-100 hover:bg-yellow-100 text-purple-800 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                              type="button"
+                            >
+                              <i className="fab fa-instagram"></i>
+                            </button>
+                          </a>
+                          <a
+                            href="https://twitter.com/FedeUlbrich"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            {" "}
+                            <button
+                              className="bg-gray-100 hover:bg-yellow-100 text-lightBlue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                              type="button"
+                            >
+                              <i className="fab fa-twitter"></i>
+                            </button>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div className="w-full  px-4 ">
-                  <div className="py-6 px-3 mt-32 sm:mt-0">
+                  <div className="py-6 px-3 md:mt-32 sm:mt-0">
                     <a href="mailto:fede@dashboard.ltd">
                       <button
                         className="bg-yellow-600 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"

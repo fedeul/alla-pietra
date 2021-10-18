@@ -22,7 +22,7 @@ const NavBar = () => {
     <div className="dropdown relative items-center mt-4 md:mt-0 mx-6">
       <button
         type="button"
-        className="relative z-10 block p-2 bg-white rounded-md dark:bg-gray-800 focus:outline-none"
+        className="relative z-10 block p-2 bg-white rounded-md dark:bg-gray-800 focus:focus:outline-none"
         aria-label="toggle profile dropdown"
       >
         <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
@@ -70,7 +70,7 @@ const NavBar = () => {
               <div className="dropdown relative items-center mt-4 md:mt-0 mx-6">
                 <button
                   type="button"
-                  className="relative z-10 block p-2 bg-white rounded-md dark:bg-gray-800 focus:outline-none"
+                  className="relative z-10 block p-2 bg-white rounded-md dark:bg-gray-800 focus:focus:outline-none"
                   aria-label="toggle profile dropdown"
                 >
                   <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
@@ -94,7 +94,7 @@ const NavBar = () => {
                         <div className="dropdown relative items-center mt-4 md:mt-0 mx-6">
                           <button
                             type="button"
-                            className="relative z-10 block p-2 bg-white rounded-md dark:bg-gray-800 focus:outline-none"
+                            className="relative z-10 block p-2 bg-white rounded-md dark:bg-gray-800 focus:focus:outline-none"
                             aria-label="toggle profile dropdown"
                           >
                             <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
@@ -130,7 +130,7 @@ const NavBar = () => {
           <div className="flex items-center justify-between">
             <Link exact to="/">
               <div>
-                <button className="outline-none text-2xl font-bold text-gray-800 dark:text-white lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300">
+                <button className="focus:outline-none text-2xl font-bold text-gray-800 dark:text-white lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300">
                   <img
                     src={Logotipo}
                     className="logotipo"
@@ -140,12 +140,10 @@ const NavBar = () => {
               </div>
             </Link>
           </div>
-
-          {/* <!-- Mobile Menu open: "block", Menu closed: "hidden" --> */}
           <div className="items-center md:flex">
             <div className="flex flex-col md:flex-row md:mx-6">
               <div className="dropdown relative items-center mt-4 md:mt-0">
-                <button className="outline-none">
+                <button className="focus:outline-none">
                   <p className="flex place-items-center my-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-yellow-600 dark:hover:text-green-400 md:mx-4 md:my-0">
                     <RiBookOpenLine className="mr-2" /> Catalog <IoCaretDown />
                   </p>
@@ -153,23 +151,23 @@ const NavBar = () => {
                 {/* <!-- Dropdown menu --> */}
                 <div className="absolute opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95  right-0 z-20 w-48 py-2 mt-2 bg-white rounded-md shadow-xl dark:bg-gray-800">
                   <Link exact to="/category">
-                    <p className="outline-none flex place-items-center px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white">
+                    <p className="focus:outline-none flex place-items-center px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white">
                       <BsViewList className="mr-2" /> All products
                     </p>
                   </Link>
                   <hr />
                   <Link exact to="/category/equipment">
-                    <p className="outline-none flex place-items-center px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white">
+                    <p className="focus:outline-none flex place-items-center px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white">
                       <RiScales2Line className="mr-2" /> Equipment
                     </p>
                   </Link>
                   <Link exact to="/category/supplies">
-                    <p className="outline-none flex place-items-center px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white">
+                    <p className="focus:outline-none flex place-items-center px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white">
                       <IoStorefrontOutline className="mr-2" /> Supplies
                     </p>
                   </Link>
                   <Link exact to="/category/tools">
-                    <p className="outline-none flex place-items-center px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white">
+                    <p className="focus:outline-none flex place-items-center px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-green-500 hover:text-white dark:hover:text-white">
                       <RiKnifeLine className="mr-2" /> Tools
                     </p>
                   </Link>
@@ -177,7 +175,7 @@ const NavBar = () => {
               </div>
               <Link exact to="/sales">
                 <p
-                  className="outline-none flex place-items-center my-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-yellow-600 dark:hover:text-green-400 md:mx-4 md:my-0"
+                  className="focus:outline-none flex place-items-center my-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-yellow-600 dark:hover:text-green-400 md:mx-4 md:my-0"
                   href="#sales"
                 >
                   <RiPercentLine className="mr-2" /> Sales
@@ -186,7 +184,7 @@ const NavBar = () => {
               <Link exact to="/about">
                 {" "}
                 <p
-                  className="outline-none flex place-items-center my-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-yellow-600 dark:hover:text-green-400 md:mx-4 md:my-0"
+                  className="focus:outline-none flex place-items-center my-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-yellow-600 dark:hover:text-green-400 md:mx-4 md:my-0"
                   href="#about"
                 >
                   <RiInformationLine className="mr-2" /> About

@@ -15,18 +15,18 @@ const ItemCount = ({ initial, stock, onAdd, price, cap }) => {
   const buttonAdd = () => {
     return (
       <>
-        ADD TO
+        <span className="mr-2">ADD TO</span>
         {cartIcon()}
       </>
     );
   };
 
   const styleZero = () => {
-    return "bg-gray-300 shadow-md text-sm flex place-items-center  text-gray-400  rounded-full px-7 py-2 font-semibold";
+    return "bg-gray-300 shadow-md text-sm flex place-items-center  text-gray-400  rounded-full px-4 py-2 font-semibold";
   };
 
   const styleNonZero = () => {
-    return "bg-yellow-400 shadow-md text-sm flex place-items-center opacity-75 hover:opacity-100 text-yellow-900 hover:text-gray-900 rounded-full px-7 py-2 font-semibold";
+    return "bg-yellow-400 shadow-md text-sm flex place-items-center opacity-75 hover:opacity-100 text-yellow-900 hover:text-gray-900 rounded-full px-4 py-2 font-semibold";
   };
 
   const ButtonZeroItem = () => {
@@ -47,7 +47,7 @@ const ItemCount = ({ initial, stock, onAdd, price, cap }) => {
       <>
         <Link to="/cart">
           <button className="bg-green-400 shadow-md flex justify-center items-center text-center opacity-75 hover:opacity-100 text-gray-900 hover:text-gray-900 hover:shadow-xl w-full mt-3 px-7 py-2 font-semibold">
-            GO TO
+            <span className="mr-2">GO TO</span>
             {cartIcon()}
           </button>
         </Link>

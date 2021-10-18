@@ -19,7 +19,7 @@ const CartWidget = () => {
       ) : (
         <Link to="/cart">
           <div className="flex justify-center md:block">
-            <button className="relative text-gray-700 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-300">
+            <button className="focus:outline-none relative text-gray-700 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-300">
               {cartIcon()}
               <span className="absolute bottom-3 right-3 p-1 px-2 text-xs text-white bg-green-500 bg-opacity-75 hover:bg-opacity-75 hover:bg-yellow-500 rounded-full">
                 <span className="bg-opacity-100">{iconCart()}</span>

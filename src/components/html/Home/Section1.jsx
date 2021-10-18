@@ -18,7 +18,7 @@ const Section1 = () => {
         <div className="container relative mx-auto">
           <div className="items-center flex flex-wrap">
             <div className="w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
-              <div className="pr-12">
+              <div>
                 <h1 className="text-white font-semibold text-5xl">
                   Artisan bakery in your home
                 </h1>
