@@ -6,7 +6,7 @@ const Section1 = () => {
           className="absolute top-0 w-full h-full bg-center bg-cover"
           style={{
             backgroundImage:
-              "url('http://allapietra.eldiletante.com.ar/wp-content/uploads/2021/02/bread-691467_1920.jpg')",
+              "url('https://cdn-a.william-reed.com/var/wrbm_gb_food_pharma/storage/images/publications/food-beverage-nutrition/bakeryandsnacks.com/article/2020/10/06/engelman-baking-sets-drive-in-motion-to-become-leading-wholesale-bakery-in-southeastern-us/11825778-1-eng-GB/Engelman-Baking-sets-drive-in-motion-to-become-leading-wholesale-bakery-in-Southeastern-US.jpg')",
           }}
         >
           <div

@@ -26,7 +26,7 @@ const Section3 = () => {
             <div className="relative flex flex-col min-w-0 break-words  w-full mb-2 shadow-lg rounded-lg bg-red-600">
               <img
                 alt="..."
-                src="//allapietra.eldiletante.com.ar/wp-content/uploads/2021/02/pizza-2885089_1280.jpg"
+                src="https://i.ytimg.com/vi/Li8uoSx0E_4/maxresdefault.jpg"
                 className="w-full align-middle rounded-t-lg"
               />
               <blockquote className="relative p-8 mb-4">
