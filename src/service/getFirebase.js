@@ -2,7 +2,7 @@ import firebase from "firebase";
 import "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD4CD8Uyz5LsGcEsJrRtkiIg7rv_2FAzJI",
+  apiKey: process.env.APIKEY,
   authDomain: "almacenpanadero.firebaseapp.com",
   projectId: "almacenpanadero",
   storageBucket: "almacenpanadero.appspot.com",
