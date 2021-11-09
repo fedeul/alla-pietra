@@ -3,11 +3,11 @@ import "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.APIKEY,
-  authDomain: "almacenpanadero.firebaseapp.com",
-  projectId: "almacenpanadero",
-  storageBucket: "almacenpanadero.appspot.com",
-  messagingSenderId: "439195503589",
-  appId: "1:439195503589:web:34c23c6899503d84ad7d0c",
+  authDomain: process.env.authDomain,
+  projectId: process.env.projectId,
+  storageBucket: process.env.storageBucket,
+  messagingSenderId: process.env.messagingSenderId,
+  appId: process.env.appId,
 };
 
 const app = firebase.initializeApp(firebaseConfig);
