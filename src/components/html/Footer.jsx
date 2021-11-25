@@ -25,7 +25,7 @@ const Footer = () => {
             </div>
             <div className="w-full lg:w-6/12 px-4">
               <div className="mb-6">
-                <div className="flex flex-wrap justify-center">
+                <div className="flex flex-wrap justify-end">
                   <div className="mt-6 lg:mb-0 mb-6">
                     <a
                       href="https://www.dashboard.ltd"
