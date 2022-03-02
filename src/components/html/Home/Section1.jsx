@@ -6,7 +6,7 @@ const Section1 = () => {
           className="absolute top-0 w-full h-full bg-center bg-cover"
           style={{
             backgroundImage:
-              "url('https://cdn-a.william-reed.com/var/wrbm_gb_food_pharma/storage/images/publications/food-beverage-nutrition/bakeryandsnacks.com/article/2020/10/06/engelman-baking-sets-drive-in-motion-to-become-leading-wholesale-bakery-in-southeastern-us/11825778-1-eng-GB/Engelman-Baking-sets-drive-in-motion-to-become-leading-wholesale-bakery-in-Southeastern-US.jpg')",
+              "url('https://medinabaking.com/wp-content/uploads/2020/05/Artisan-Bread-800x534.jpg')",
           }}
         >
           <div
