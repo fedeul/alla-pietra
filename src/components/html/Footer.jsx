@@ -116,7 +116,7 @@ const Footer = () => {
               <div className="text-sm text-gray-100 font-semibold py-1">
                 Copyright © <span id="get-current-year">2021</span> by{" "}
                 <a
-                  href="https://www.dashboard.ltd/about"
+                  href="https://www.dashboard.ltd/about.html"
                   className="hover:text-red-500 text-yellow-600"
                   target="_blank"
                   rel="noreferrer"
