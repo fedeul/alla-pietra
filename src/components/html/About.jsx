@@ -188,7 +188,7 @@ const About = () => {
                         thinking and apply it to my projects.
                       </p>
                       <a
-                        href="https://www.dashboard.ltd/about.php"
+                        href="https://www.dashboard.ltd/about.html"
                         className="font-normal text-yellow-600"
                       >
                         More about me
