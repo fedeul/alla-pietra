@@ -80,7 +80,7 @@ const Footer = () => {
                       </button>
                     </a>
                     <a
-                      href="https://instagram.com/proyectosdiletantes"
+                      href="https://instagram.com/wearedashboard"
                       target="_blank"
                       rel="noreferrer"
                     >
