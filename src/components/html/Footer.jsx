@@ -114,7 +114,7 @@ const Footer = () => {
           <div className="mt-6 flex flex-wrap items-center md:justify-between justify-center">
             <div className="w-full md:w-4/12 px-4 mx-auto text-center">
               <div className="text-sm text-gray-100 font-semibold py-1">
-                Copyright © <span id="get-current-year">2021</span> by{" "}
+                Copyright © <span id="get-current-year">2022</span> by{" "}
                 <a
                   href="https://www.dashboard.ltd/about.html"
                   className="hover:text-red-500 text-yellow-600"
