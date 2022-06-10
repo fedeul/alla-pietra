@@ -1,8 +1,7 @@
-// import firebase from "firebase";
-
-import firebase from 'firebase/app';
+import firebase from "firebase";
+import { initializeApp } from "firebase/app";
 import "firebase/firestore";
-import 'firebase/database';
+import "firebase/database";
 
 const firebaseConfig = {
   apiKey: process.env.APIKEY,
@@ -13,7 +12,7 @@ const firebaseConfig = {
   appId: process.env.appId,
 };
 
-const app = firebase.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
 export function getFirestore() {
   return firebase.firestore(app);
